@@ -1,0 +1,117 @@
+$itemBg: rgb(50, 50, 50);
+$itemBg2: rgb(37, 33, 33);
+$lightText: rgb(155, 155, 155);
+$bg: hsl(0, 0%, 5%);
+body {
+  background-color: $bg;
+
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  color: rgb(222, 222, 222);
+  text-align: center;
+  // font-size: 1.2rem;
+}
+
+.add-item {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+  background-color: $itemBg2;
+  min-width: 30rem;
+}
+
+input {
+  // font-size: 1rem;
+  padding: 0.4rem;
+
+  &[type="number"] {
+    width: 2rem;
+    margin-right: auto;
+  }
+  outline: none;
+  border: solid 1px transparent;
+  border-radius: 0.3em;
+  background-color: $itemBg;
+  color: $lightText;
+  &:focus {
+    border-color: $lightText;
+  }
+}
+.items-container {
+  margin-top: 2rem;
+}
+
+.item {
+  background-color: $itemBg;
+  padding: 1rem 0.8rem;
+  margin: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: last baseline;
+  gap: 0.5rem;
+
+  border-radius: 0.25rem;
+  min-width: 30rem;
+  transition: height 0.4s ease-in-out;
+  // font-size: 2.8rem;
+  min-height: 2.3rem;
+
+  button {
+    $buttonRadius: 15px;
+    height: $buttonRadius;
+    width: $buttonRadius;
+    border-radius: 50%;
+    border: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .tag {
+    // font-size: 0.5rem;
+    padding: 0.4em;
+    border-radius: 0.4em;
+    font-weight: 600;
+    letter-spacing: -0.04rem;
+    margin-left: auto;
+  }
+
+  .duration {
+    // font-size: 0.5rem;
+    color: $lightText;
+  }
+
+  .text-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+  .label {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+}
+
+.focus-mode {
+  border: none;
+  background-color: hsl(260, 7%, 13%);
+  // font-size: 0.5rem;
+  padding: 0.4rem;
+  margin-top: 0.5rem;
+  border-radius: 0.3rem;
+  color: $lightText;
+  transition: all 0.4s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
