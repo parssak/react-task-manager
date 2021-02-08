@@ -3,6 +3,8 @@ $itemBg2: hsl(210, 6%, 14%);
 $lightText: rgb(155, 155, 155);
 $bg: hsl(0, 0%, 5%);
 $bg2: hsl(0, 0%, 7%);
+$inputBg: #333;
+
 body {
   background-color: $bg;
   overflow: hidden;
@@ -43,27 +45,19 @@ button {
 }
 
 .add-item {
-  // margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.4rem;
   min-width: 40%;
-
-  padding: 0.5rem;
-  background: rgba(39, 39, 39, 0.5);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  // padding: 0.5rem;
 }
 
 input {
   outline: none;
   border: solid 1px transparent;
   border-radius: 0.3em;
-  background: #333;
+  background: $inputBg;
   color: $lightText;
 
   font-size: 1rem;
@@ -80,16 +74,38 @@ input {
     flex-grow: 1;
   }
 }
+
+.glassy {
+  background: rgba(39, 39, 39, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  max-height: 70vh;
+  padding: 0.5rem;
+}
+
+.glassy-inner {
+  border: 1px solid rgba(100, 100, 100, 0.1);
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
+}
+
 .items-container {
   margin-top: 1rem;
   min-width: 40%;
   padding: 0 0.5rem;
-  background: rgba(39, 39, 39, 0.5);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  // transition: all 1s ease-in-out;
+
+  overflow-y: auto;
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  // overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .item {
@@ -103,6 +119,9 @@ input {
   border-radius: 0.25rem;
   transition: height 0.4s ease-in-out;
   min-height: 2.3rem;
+
+  border: 1px solid rgba(100, 100, 100, 0.1);
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
 
   button {
     $buttonRadius: 15px;
@@ -150,8 +169,8 @@ input {
 .selector {
   border: none;
   outline: none;
-  background: #333;
-  border: #333 !important;
+  background: $inputBg;
+  border: $inputBg !important;
   color: #fff;
   border-radius: 0.3rem !important;
   .react-dropdown-select-clear,
@@ -162,7 +181,7 @@ input {
     border: 1px solid #fff;
   }
   .react-dropdown-select-item {
-    color: #333;
+    color: $inputBg;
   }
   .react-dropdown-select-input {
     color: #fff;
@@ -175,7 +194,7 @@ input {
     max-height: 300px;
     overflow: auto;
     z-index: 9;
-    background: #333;
+    background: $inputBg;
     box-shadow: none;
     margin-top: 0.4rem;
     box-shadow: 0 3px 0.6rem rgba(0, 0, 0, 0.5);
@@ -185,7 +204,7 @@ input {
   }
   .react-dropdown-select-item {
     color: #f2f2f2;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid $inputBg;
 
     :hover {
       color: #ffffff80;
@@ -193,7 +212,7 @@ input {
   }
   .react-dropdown-select-item.react-dropdown-select-item-selected,
   .react-dropdown-select-item.react-dropdown-select-item-active {
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid $inputBg;
     color: #fff;
     font-weight: bold;
   }
@@ -222,4 +241,20 @@ input[type="number"] {
   min-width: 100vw;
   filter: brightness(0.3) blur(5px);
   overflow: hidden;
+}
+
+.date-picker {
+  outline: 0px !important;
+  & > * {
+    border: 1px solid rgba(100, 100, 100, 0.1);
+    border-radius: 0.3rem;
+    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
+    padding: 0.5rem;
+    background-color: $inputBg;
+    // border: 0px transparent !important;
+  }
+}
+.date-picker-calendar {
+  border: none;
+  background-color: $bg;
 }

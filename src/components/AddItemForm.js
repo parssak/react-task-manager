@@ -59,14 +59,14 @@ const AddItemForm = () => {
     }
   }
   return (
-    <div className="add-item">
+    <div className="add-item glassy">
       <input type="text" value={label} onChange={e => setLabel(e.target.value)}
-        onKeyDown={e => handleKeyPress(e)} /> 
+        onKeyDown={e => handleKeyPress(e)} className="glassy-inner"/> 
       <input type="number" value={duration} onChange={e => setDuration(e.target.value)}
-        onKeyPress={e => e.key === "Enter" && handleSubmit(e)} />
+        onKeyPress={e => e.key === "Enter" && handleSubmit(e)} className="glassy-inner"/>
       <Select options={options} onChange={(value) => setTag(value)}
-        wrapperClassName={"selector"} className={"selector"} />
-      <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} />
+        wrapperClassName={"selector"} className={"selector glassy-inner"} />
+      <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName="date-picker-calendar" className="date-picker"/>
     </div>
   );
 };

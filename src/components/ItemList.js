@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import ItemsContext from '../context/items-context';
 import Item from './Item';
+import daysIntoYear from '../helper-functions/daysIntoYear';
 
 function recalculateSizes(items) {
   let a = 9999;
@@ -11,12 +12,13 @@ function recalculateSizes(items) {
     if (d >= b) b = d;
   })
   return [a, b]
-}  
+}
 
 
-const ItemList = ({sort}) => {
+const ItemList = ({ sort }) => {
   const { items } = useContext(ItemsContext);
   const [, setToggle] = useState(true);
+  const today = daysIntoYear(new Date());
   let [min, max] = recalculateSizes(items);
   recalculateSizes(items);
   const updated = () => {
@@ -31,18 +33,25 @@ const ItemList = ({sort}) => {
     items.sort((a, b) => {
       if (!a.data.tag) return -1;
       if (!b.data.tag) return -1;
-      console.log( a.data.tag.label.localeCompare(b.data.tag.label, 'en'))
-     return a.data.tag.label.localeCompare(b.data.tag.label, 'en')
+      console.log(a.data.tag.label.localeCompare(b.data.tag.label, 'en'))
+      return a.data.tag.label.localeCompare(b.data.tag.label, 'en')
     })
+  } else if (sort === "TODAY") {
+    items.filter((item) => item.data.date.dayInYear - today === 0)
   }
 
   return (
-    <div className="items-container">
-      {items
-        .map((item) => (
-          <Item key={item.key} item={item} min={min} max={max} updated={updated}/>
-        ))}
-      
+    <div className="items-container glassy">
+      {
+        (sort === "TODAY") ? items
+          .filter((item) => item.data.date.dayInYear - today === 0)
+          .map((item) => (
+            <Item key={item.key} item={item} min={min} max={max} updated={updated} />
+          )) :
+          items.map((item) => (
+            <Item key={item.key} item={item} min={min} max={max} updated={updated} />
+          ))
+      }
     </div>
   );
 };

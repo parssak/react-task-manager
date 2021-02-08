@@ -5,11 +5,14 @@ import AddItemForm from './AddItemForm';
 import './App.scss';
 import ItemList from './ItemList';
 import Header from './Header';
+import Settings from './Settings';
+
 const DURATION = "DURATION";
 const DATE = "DATE";
 const TAG = "TAG";
+const TODAY = "TODAY";
 
-const sortOptions = [DURATION, DATE, TAG];
+const sortOptions = [DURATION, DATE, TAG, TODAY];
 
 function App() {
   const [items, itemsDispatch] = useReducer(itemsReducer, []);
@@ -38,13 +41,7 @@ function App() {
         {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />}
         {toggleForm && <AddItemForm />}
         <ItemList sort={sort} />
-        <div className="h-wrap">
-          <button className="focus-mode" onClick={() => toggleAddForm()}>{!toggleForm ? "" : "Focus Mode"}</button>
-          <button className="focus-mode" onClick={() => setSort(sortOptions[0])}>Duration</button>
-          <button className="focus-mode" onClick={() => setSort(sortOptions[1])}>Date</button>
-          <button className="focus-mode" onClick={() => setSort(sortOptions[2])}>Tag</button>
-          <button className="focus-mode" onClick={() => toggleWallpaper(wallpaper => !wallpaper)}>Wallpaper</button>
-        </div>
+        <Settings toggleAddForm={toggleAddForm} setSort={setSort} toggleForm={toggleForm} toggleWallpaper={toggleWallpaper} sortOptions={sortOptions} />
       </div>
     </ItemsContext.Provider>
   );
