@@ -20,7 +20,6 @@ function App() {
   }, [items]);
 
   function toggleAddForm() {
-    console.log("toggling");
     setToggleForm(toggleForm => !toggleForm);
   }
   return (

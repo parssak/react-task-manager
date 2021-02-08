@@ -6,6 +6,9 @@ const itemsReducer = (state, action) => {
       return [...state, action.item];
     case 'REMOVE_ITEM':
       return state.filter((item) => item !== action.itemToBeDeleted);
+    case 'EDIT_ITEM': // todo
+      console.log(action.payload);
+      break;
     default:
       return state;
   }
