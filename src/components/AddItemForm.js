@@ -14,7 +14,7 @@ const createItem = (label, duration, tag, date) => {
     duration: duration,
     data:
     {
-      tag: tag[0],
+      tag: tag[0] || { label:"NULL"},
       date: {
         day,
         month,

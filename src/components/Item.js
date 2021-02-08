@@ -8,7 +8,6 @@ const Item = ({ item, min, max, updated }) => {
   const { itemsDispatch } = useContext(ItemsContext);
   const [current, setCurrent] = useState(false);
   const today = daysIntoYear(new Date());
-  console.log(today);
 
   let formattedDate = item.data.date.formattedDate;
   let diff = item.data.date.dayInYear - today;
@@ -37,7 +36,7 @@ const Item = ({ item, min, max, updated }) => {
 
         </div>
       </div>
-      {item.data.tag && <span className="tag" style={{ backgroundColor: item.data.tag.color }}>{item.data.tag.label}</span>}
+      {item.data.tag.label !== "NULL" && <span className="tag" style={{ backgroundColor: item.data.tag.color }}>{item.data.tag.label}</span>}
       
     </div>
   );
