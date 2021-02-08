@@ -13,16 +13,10 @@ function recalculateSizes(items) {
   return [a, b]
 }  
 
-const DURATION = "DURATION";
-const DATE = "DATE";
-const TAG = "TAG";
 
-const sortOptions = [DURATION,DATE,TAG];
-
-const ItemList = () => {
+const ItemList = ({sort}) => {
   const { items } = useContext(ItemsContext);
   const [, setToggle] = useState(true);
-  const [sort, setSort] = useState(sortOptions[2]);
   let [min, max] = recalculateSizes(items);
   recalculateSizes(items);
   const updated = () => {
@@ -44,9 +38,6 @@ const ItemList = () => {
 
   return (
     <div className="items-container">
-      <button className="focus-mode" onClick={() => setSort(sortOptions[0])}>Duration</button>
-      <button className="focus-mode" onClick={() => setSort(sortOptions[1])}>Date</button>
-      <button className="focus-mode" onClick={() => setSort(sortOptions[2])}>Tag</button>
       {items
         .map((item) => (
           <Item key={item.key} item={item} min={min} max={max} updated={updated}/>

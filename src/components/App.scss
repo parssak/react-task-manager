@@ -5,7 +5,6 @@ $bg: hsl(0, 0%, 5%);
 $bg2: hsl(0, 0%, 7%);
 body {
   background-color: $bg;
-
 }
 .App {
   display: flex;
@@ -14,7 +13,30 @@ body {
   min-height: 100vh;
   color: rgb(222, 222, 222);
   text-align: center;
-  // font-size: 1.2rem;
+}
+
+.header {
+  h1 {
+    font-size: 1.7rem;
+    color: $lightText;
+  }
+  display: flex;
+  min-width: 40%;
+  // background-color: blue;
+}
+button {
+  border: none;
+  background-color: hsl(260, 7%, 13%);
+  padding: 0.4rem;
+  margin-top: 0.5rem;
+  border-radius: 0.3rem;
+  color: $lightText;
+  transition: all 0.1s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  margin: 0.5rem 0.3rem;
 }
 
 .add-item {
@@ -23,46 +45,47 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 0.4rem;
-  padding: 0.4rem;
+  padding: 0.6rem;
   border-radius: 0.4rem;
   background-color: $itemBg2;
-  min-width: 31rem;
+  min-width: 40%;
 }
 
 input {
-  padding: 0.4rem;
   outline: none;
   border: solid 1px transparent;
   border-radius: 0.3em;
-  background-color: $bg;
+  background: #333;
   color: $lightText;
+
+  font-size: 1rem;
+  padding: 0.5rem;
+
   &:focus {
     border-color: $lightText;
   }
 
   &[type="number"] {
     width: 2rem;
-    // margin-right: auto;
   }
-  &[type=text] {
+  &[type="text"] {
     flex-grow: 1;
-    // background-color: blue;
   }
 }
 .items-container {
   margin-top: 2rem;
+  min-width: 40%;
 }
 
 .item {
   background-color: $itemBg;
   padding: 0.8rem;
-  margin: 0.4rem;
+  margin: 0.4rem 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 
   border-radius: 0.25rem;
-  min-width: 30rem;
   transition: height 0.4s ease-in-out;
   min-height: 2.3rem;
 
@@ -88,7 +111,6 @@ input {
   .duration {
     color: $lightText;
     font-size: 0.8rem;
-
   }
 
   .text-wrapper {
@@ -97,37 +119,29 @@ input {
     justify-content: space-around;
     flex-direction: column;
   }
+
   .label {
     font-size: 1.3rem;
     font-weight: 600;
   }
 }
 
-.focus-mode {
-  border: none;
-  background-color: hsl(260, 7%, 13%);
-  // font-size: 0.5rem;
-  padding: 0.4rem;
-  margin-top: 0.5rem;
-  border-radius: 0.3rem;
-  color: $lightText;
-  transition: all 0.1s ease-in-out;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-  }
-  margin: 0.5rem 0.3rem;
+.h-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .selector {
   border: none;
   outline: none;
-  background-color: green;
   background: #333;
   border: #333 !important;
   color: #fff;
+  border-radius: 0.3rem !important;
   .react-dropdown-select-clear,
   .react-dropdown-select-dropdown-handle {
-    color: #fff;
+    color: $lightText;
   }
   .react-dropdown-select-option {
     border: 1px solid #fff;
@@ -142,24 +156,28 @@ input {
     border: none;
     display: flex;
     flex-direction: column;
-    border-radius: 2px;
+    border-radius: 0.3rem;
     max-height: 300px;
     overflow: auto;
     z-index: 9;
     background: #333;
     box-shadow: none;
+    margin-top: 0.4rem;
+    box-shadow: 0 3px 0.6rem rgba(0, 0, 0, 0.5);
+  }
+  .react-dropdown-select {
+    border-radius: 2rem !important;
   }
   .react-dropdown-select-item {
     color: #f2f2f2;
     border-bottom: 1px solid #333;
-       
+
     :hover {
-       color: #ffffff80;
+      color: #ffffff80;
     }
   }
   .react-dropdown-select-item.react-dropdown-select-item-selected,
   .react-dropdown-select-item.react-dropdown-select-item-active {
-    //background: #111;
     border-bottom: 1px solid #333;
     color: #fff;
     font-weight: bold;
@@ -170,4 +188,14 @@ input {
   }
   outline: none;
   border: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

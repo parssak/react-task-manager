@@ -4,10 +4,18 @@ import itemsReducer from '../reducers/items';
 import AddItemForm from './AddItemForm';
 import './App.scss';
 import ItemList from './ItemList';
+import Header from './Header';
+const DURATION = "DURATION";
+const DATE = "DATE";
+const TAG = "TAG";
+
+const sortOptions = [DURATION, DATE, TAG];
 
 function App() {
   const [items, itemsDispatch] = useReducer(itemsReducer, []);
   const [toggleForm, setToggleForm] = useState(true);
+  const [sort, setSort] = useState(sortOptions[2]);
+
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('items'));
     if (items) {
@@ -25,9 +33,15 @@ function App() {
   return (
     <ItemsContext.Provider value={{ items, itemsDispatch }}>
       <div className="App">
+        <Header/>
         {toggleForm && <AddItemForm />}
-        <ItemList />
-        <button className="focus-mode" onClick={() => toggleAddForm()}>{!toggleForm ? "" : "Focus Mode"}</button>
+        <ItemList sort={sort} />
+        <div className="h-wrap">
+          <button className="focus-mode" onClick={() => toggleAddForm()}>{!toggleForm ? "" : "Focus Mode"}</button>
+          <button className="focus-mode" onClick={() => setSort(sortOptions[0])}>Duration</button>
+          <button className="focus-mode" onClick={() => setSort(sortOptions[1])}>Date</button>
+          <button className="focus-mode" onClick={() => setSort(sortOptions[2])}>Tag</button>
+        </div>
       </div>
     </ItemsContext.Provider>
   );
