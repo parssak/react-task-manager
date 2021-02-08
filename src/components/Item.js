@@ -26,7 +26,7 @@ const Item = ({ item, min, max, updated }) => {
     }
   
   return (
-    <div className="item" style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: current && '#060154' }} onDoubleClick={() => setCurrent(current => !current)}>
+    <div className="item" style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: current && '#b54b43' }} onDoubleClick={() => setCurrent(current => !current)}>
       <button onClick={() => removeItem()} />
       <div className="text-wrapper">
         <span className="label">{item.label}</span>

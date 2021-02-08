@@ -5,6 +5,7 @@ $bg: hsl(0, 0%, 5%);
 $bg2: hsl(0, 0%, 7%);
 body {
   background-color: $bg;
+  overflow: hidden;
 }
 .App {
   display: flex;
@@ -13,22 +14,24 @@ body {
   min-height: 100vh;
   color: rgb(222, 222, 222);
   text-align: center;
+  overflow: none;
 }
 
 .header {
+  margin-top: 1rem;
   h1 {
     font-size: 1.7rem;
-    color: $lightText;
+    color: white;
+    // mix-blend-mode: difference;
   }
   display: flex;
   min-width: 40%;
-  // background-color: blue;
 }
 button {
   border: none;
   background-color: hsl(260, 7%, 13%);
   padding: 0.4rem;
-  margin-top: 0.5rem;
+  margin-top: 0.1rem;
   border-radius: 0.3rem;
   color: $lightText;
   transition: all 0.1s ease-in-out;
@@ -40,15 +43,20 @@ button {
 }
 
 .add-item {
-  margin-top: 2rem;
+  // margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.4rem;
-  padding: 0.6rem;
-  border-radius: 0.4rem;
-  background-color: $itemBg2;
   min-width: 40%;
+
+  padding: 0.5rem;
+  background: rgba(39, 39, 39, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 input {
@@ -73,14 +81,21 @@ input {
   }
 }
 .items-container {
-  margin-top: 2rem;
+  margin-top: 1rem;
   min-width: 40%;
+  padding: 0 0.5rem;
+  background: rgba(39, 39, 39, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .item {
   background-color: $itemBg;
   padding: 0.8rem;
-  margin: 0.4rem 0;
+  margin: 0.5rem 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -198,4 +213,13 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.background-img {
+  position: absolute;
+  z-index: -1;
+  max-height: 100vh;
+  min-width: 100vw;
+  filter: brightness(0.3) blur(5px);
+  overflow: hidden;
 }

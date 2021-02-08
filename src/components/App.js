@@ -14,6 +14,7 @@ const sortOptions = [DURATION, DATE, TAG];
 function App() {
   const [items, itemsDispatch] = useReducer(itemsReducer, []);
   const [toggleForm, setToggleForm] = useState(true);
+  const [wallpaper, toggleWallpaper] = useState(true);
   const [sort, setSort] = useState(sortOptions[2]);
 
   useEffect(() => {
@@ -33,7 +34,8 @@ function App() {
   return (
     <ItemsContext.Provider value={{ items, itemsDispatch }}>
       <div className="App">
-        <Header/>
+        <Header />
+        {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />}
         {toggleForm && <AddItemForm />}
         <ItemList sort={sort} />
         <div className="h-wrap">
@@ -41,6 +43,7 @@ function App() {
           <button className="focus-mode" onClick={() => setSort(sortOptions[0])}>Duration</button>
           <button className="focus-mode" onClick={() => setSort(sortOptions[1])}>Date</button>
           <button className="focus-mode" onClick={() => setSort(sortOptions[2])}>Tag</button>
+          <button className="focus-mode" onClick={() => toggleWallpaper(wallpaper => !wallpaper)}>Wallpaper</button>
         </div>
       </div>
     </ItemsContext.Provider>
