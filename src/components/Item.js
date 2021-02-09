@@ -4,9 +4,8 @@ import calculateHeight from '../helper-functions/calculateHeight'
 import formatTime from '../helper-functions/formatTime'
 import daysIntoYear from '../helper-functions/daysIntoYear';
 
-const Item = ({ item, min, max, updated }) => {
+const Item = ({ item, min, max, updated, selectItem, isSelected }) => {
   const { itemsDispatch } = useContext(ItemsContext);
-  const [current, setCurrent] = useState(false);
   const today = daysIntoYear(new Date());
 
   let formattedDate = item.data.date.formattedDate;
@@ -20,13 +19,16 @@ const Item = ({ item, min, max, updated }) => {
   else if (diff === -1)
     formattedDate = "Yesterday"
 
-    function removeItem() {
-      updated();
-      itemsDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: item });
-    }
-  
+  function removeItem() {
+    updated();
+    itemsDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: item });
+  }
+
   return (
-    <div className="item" style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: current && 'rgb(45,50,70)' }} onDoubleClick={() => setCurrent(current => !current)}>
+    <div className="item glassy-inner"
+      style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: isSelected && 'rgb(45,50,70)' }}
+      onDoubleClick={() => selectItem(item.key)}>
+      
       <button onClick={() => removeItem()} />
       <div className="text-wrapper">
         <span className="label">{item.label}</span>
@@ -34,11 +36,10 @@ const Item = ({ item, min, max, updated }) => {
           <span className="duration">{formattedDate}</span>
           <span className="duration"> | </span>
           <span className="duration">{formatTime(item.duration)}</span>
-
         </div>
       </div>
       {item.data.tag.label !== "NULL" && <span className="tag" style={{ backgroundColor: item.data.tag.color }}>{item.data.tag.label}</span>}
-      
+
     </div>
   );
 };

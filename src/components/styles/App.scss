@@ -1,9 +1,4 @@
-$itemBg: rgb(50, 50, 50);
-$itemBg2: hsl(210, 6%, 14%);
-$lightText: rgb(155, 155, 155);
-$bg: hsl(0, 0%, 5%);
-$bg2: hsl(0, 0%, 7%);
-$inputBg: #333;
+@import 'master.scss';
 
 body {
   background-color: $bg;
@@ -14,7 +9,7 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  color: rgb(222, 222, 222);
+  color: $regText;
   text-align: center;
   overflow: none;
 }
@@ -23,8 +18,7 @@ body {
   margin-top: 1rem;
   h1 {
     font-size: 1.7rem;
-    color: white;
-    // mix-blend-mode: difference;
+    color: $regText;
   }
   display: flex;
   min-width: 40%;
@@ -50,7 +44,6 @@ button {
   justify-content: space-between;
   gap: 0.4rem;
   min-width: 40%;
-  // padding: 0.5rem;
 }
 
 input {
@@ -96,13 +89,10 @@ input {
   margin-top: 1rem;
   min-width: 40%;
   padding: 0 0.5rem;
-  // transition: all 1s ease-in-out;
 
   overflow-y: auto;
-  /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  // overflow-y: auto;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -119,9 +109,6 @@ input {
   border-radius: 0.25rem;
   transition: height 0.4s ease-in-out;
   min-height: 2.3rem;
-
-  border: 1px solid rgba(100, 100, 100, 0.1);
-  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
 
   button {
     $buttonRadius: 15px;
@@ -254,6 +241,7 @@ input[type="number"] {
     // border: 0px transparent !important;
   }
 }
+
 .date-picker-calendar {
   border: none;
   background-color: $bg;
@@ -270,5 +258,4 @@ input[type="number"] {
   transition: all 0.5s ease;
   margin-right: 2rem;
   transform: scale(1);
-
 }

@@ -12,6 +12,7 @@
     "react-date-picker": "^8.0.7",
     "react-dom": "^16.13.1",
     "react-dropdown-select": "^4.7.3",
+    "react-edit-text": "^3.0.1",
     "react-scripts": "3.4.3",
     "uuid": "^8.3.2"
   },

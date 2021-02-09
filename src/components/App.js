@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer } from 'react';
 import ItemsContext from '../context/items-context';
 import itemsReducer from '../reducers/items';
 import AddItemForm from './AddItemForm';
-import './App.scss';
+import './styles/App.scss';
 import ItemList from './ItemList';
 import Header from './Header';
 import Settings from './Settings';
@@ -20,6 +20,7 @@ function App() {
   const [toggleForm, setToggleForm] = useState(true);
   const [wallpaper, toggleWallpaper] = useState(true);
   const [sort, setSort] = useState(sortOptions[2]);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('items'));
@@ -35,14 +36,20 @@ function App() {
   function toggleAddForm() {
     setToggleForm(toggleForm => !toggleForm);
   }
+
+  function selectItem(key) {
+    console.log("selected ", key);
+    setSelectedItem(key);
+  }
+
   return (
     <ItemsContext.Provider value={{ items, itemsDispatch }}>
       <div className="App">
         <Header />
         {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />}
         {toggleForm && <AddItemForm />}
-        <ItemList sort={sort} />
-        {/* <EditItem /> */}
+        <ItemList sort={sort} select={selectItem} selectedItem={selectedItem}/>
+        {selectedItem !== null && <EditItem itemKey={selectedItem}/>}
         <Settings toggleAddForm={toggleAddForm} setSort={setSort} toggleForm={toggleForm} toggleWallpaper={toggleWallpaper} sortOptions={sortOptions} />
       </div>
     </ItemsContext.Provider>
