@@ -4,10 +4,9 @@ const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Fri
 const Header = () => {
     let [day, month, year, dayOfWeek] = getDateValues(new Date());
     
-    console.log(day, month, year, dayOfWeek);
     return (
         <div className="header">
-            <h1>{`Today is ${daysOfWeek[dayOfWeek]}, ${month} ${day}`}</h1>
+            <h1>{`Today is ${daysOfWeek[dayOfWeek]}, ${month} ${day} ${year}`}</h1>
         </div>
     );
 }

@@ -21,7 +21,11 @@ body {
     color: $regText;
   }
   display: flex;
-  min-width: 40%;
+  text-align: left;
+  // flex-grow: 1;
+  // min-width: 40%;
+  width: 100%;
+  margin-left: 3rem;
 }
 button {
   border: none;
@@ -43,7 +47,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 0.4rem;
-  min-width: 40%;
+  width: calc(100% - 3rem);
 }
 
 input {
@@ -83,74 +87,6 @@ input {
 .glassy-inner {
   border: 1px solid rgba(100, 100, 100, 0.1);
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
-}
-
-.items-container {
-  margin-top: 1rem;
-  min-width: 40%;
-  padding: 0 0.5rem;
-
-  overflow-y: auto;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.item {
-  background-color: $itemBg;
-  padding: 0.8rem;
-  margin: 0.5rem 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  border-radius: 0.25rem;
-  transition: height 0.4s ease-in-out;
-  min-height: 2.3rem;
-
-  button {
-    $buttonRadius: 15px;
-    height: $buttonRadius;
-    width: $buttonRadius;
-    border-radius: 50%;
-    border: none;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .tag {
-    padding: 0.4em;
-    border-radius: 0.4em;
-    font-weight: 600;
-    letter-spacing: -0.04rem;
-    margin-left: auto;
-  }
-
-  .duration {
-    color: $lightText;
-    font-size: 0.8rem;
-  }
-
-  .text-wrapper {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-around;
-    flex-direction: column;
-  }
-
-  .label {
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-}
-
-.h-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .selector {
@@ -247,15 +183,4 @@ input[type="number"] {
   background-color: $bg;
 }
 
-.edit-item {
-  position: absolute;
-  width: 10rem;
-  height: 100vh;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-  transition: all 0.5s ease;
-  margin-right: 2rem;
-  transform: scale(1);
-}
+@import 'Item.scss';

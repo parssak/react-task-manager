@@ -48,8 +48,11 @@ function App() {
         <Header />
         {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />}
         {toggleForm && <AddItemForm />}
-        <ItemList sort={sort} select={selectItem} selectedItem={selectedItem}/>
+        <div className="h-wrapper">
+<ItemList sort={sort} select={selectItem} selectedItem={selectedItem}/>
         {selectedItem !== null && <EditItem itemKey={selectedItem}/>}
+        </div>
+        
         <Settings toggleAddForm={toggleAddForm} setSort={setSort} toggleForm={toggleForm} toggleWallpaper={toggleWallpaper} sortOptions={sortOptions} />
       </div>
     </ItemsContext.Provider>

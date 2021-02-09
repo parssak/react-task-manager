@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext} from 'react';
 import ItemsContext from '../context/items-context';
 import calculateHeight from '../helper-functions/calculateHeight'
 import formatTime from '../helper-functions/formatTime'
@@ -27,7 +27,7 @@ const Item = ({ item, min, max, updated, selectItem, isSelected }) => {
   return (
     <div className="item glassy-inner"
       style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: isSelected && 'rgb(45,50,70)' }}
-      onDoubleClick={() => selectItem(item.key)}>
+      onDoubleClick={() => selectItem(isSelected ? null : item.key)}>
       
       <button onClick={() => removeItem()} />
       <div className="text-wrapper">

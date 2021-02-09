@@ -1,0 +1,97 @@
+.h-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+
+    gap: 0.5rem;
+}
+
+.items-container {
+    margin: 1rem;
+    padding: 0 0.5rem;
+    flex-grow: 3;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.item {
+    background-color: $itemBg;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    border-radius: 0.25rem;
+    transition: height 0.4s ease-in-out;
+    min-height: 2.3rem;
+
+    button {
+        $buttonRadius: 15px;
+        height: $buttonRadius;
+        width: $buttonRadius;
+        border-radius: 50%;
+        border: none;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .tag {
+        padding: 0.4em;
+        border-radius: 0.4em;
+        font-weight: 600;
+        letter-spacing: -0.04rem;
+        margin-left: auto;
+    }
+
+    .duration {
+        color: $lightText;
+        font-size: 0.8rem;
+    }
+
+    .text-wrapper {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+
+    .label {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+}
+
+.edit-item {
+    position: relative;
+    min-width: 10rem;
+    flex-grow: 1;
+    //   height: 100vh;
+    //   right: 0;
+    //   bottom: 0;
+    //   top: 0;
+    //   margin: auto;
+    transition: width 5s ease;
+    transform: scale(1);
+    padding: 1rem;
+    & > * {
+        margin: 0.5rem;
+    }
+    .item-name {
+        font-size: 1.4rem;
+        font-weight: 800;
+        max-width: 10ch;
+        text-align: left;
+    }
+    .item-duration {
+        font-size: 1.4rem;
+        max-width: 10ch;
+        text-align: left;
+    }
+}

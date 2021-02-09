@@ -8,7 +8,7 @@ const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 export default function getDateValues(date) {
     const day = date.getDate();
     const dayOfWeek = date.getDay();
-    const month = date.toLocaleString('default', { month: 'short' });
+    const month = date.toLocaleString('default', { month: 'short' }).substring(0,3);
     const year = date.getFullYear();
     const dayOfWeekFormatted = daysOfWeek[dayOfWeek];
     const formattedDate = `${dayOfWeekFormatted}, ${month} ${day}`;
