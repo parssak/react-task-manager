@@ -6,6 +6,7 @@ import './App.scss';
 import ItemList from './ItemList';
 import Header from './Header';
 import Settings from './Settings';
+import EditItem from './EditItem';
 
 const DURATION = "DURATION";
 const DATE = "DATE";
@@ -41,6 +42,7 @@ function App() {
         {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />}
         {toggleForm && <AddItemForm />}
         <ItemList sort={sort} />
+        {/* <EditItem /> */}
         <Settings toggleAddForm={toggleAddForm} setSort={setSort} toggleForm={toggleForm} toggleWallpaper={toggleWallpaper} sortOptions={sortOptions} />
       </div>
     </ItemsContext.Provider>
