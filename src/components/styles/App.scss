@@ -1,5 +1,17 @@
 @import "master.scss";
 
+/* ~ Table of Contents ~
+   1. Global Styles
+	 2. Layout Classes
+	 3. Helper Classes
+*/
+
+/*
+	----------------------
+	1.  Global Styles
+	----------------------
+*/
+
 html,
 body {
   background-color: $bg;
@@ -10,6 +22,49 @@ body {
     overflow: hidden !important;
   }
 }
+
+input {
+  outline: none;
+  border-radius: 0.3em;
+  background: $inputBg;
+  color: $lightText;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  padding: 0.5rem;
+
+  &:focus {
+    border-color: $lightText;
+  }
+
+  &[type="number"] {
+    width: 2rem;
+  }
+  &[type="text"] {
+    flex-grow: 1;
+  }
+}
+
+
+button {
+  border: none;
+  background-color: hsl(260, 7%, 13%);
+  padding: 0.4rem;
+  margin-top: 0.1rem;
+  border-radius: 0.3rem;
+  color: $lightText;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  margin: 0.5rem 0.3rem;
+}
+
+/*
+	----------------------
+	2.  Layout Classes
+	----------------------
+*/
+
 .App {
   display: flex;
   flex-direction: column;
@@ -33,41 +88,21 @@ body {
   margin-left: 3rem;
 }
 
-button {
-  border: none;
-  background-color: hsl(260, 7%, 13%);
-  padding: 0.4rem;
-  margin-top: 0.1rem;
-  border-radius: 0.3rem;
-  color: $lightText;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-  }
-  margin: 0.5rem 0.3rem;
+
+.background-img {
+  position: absolute;
+  z-index: -1;
+  max-height: 100vh;
+  min-width: 100vw;
+  filter: brightness(0.3) blur(5px);
+  overflow: none !important;
 }
 
-
-input {
-  outline: none;
-  border-radius: 0.3em;
-  background: $inputBg;
-  color: $lightText;
-  border: 1px solid transparent;
-  font-size: 1rem;
-  padding: 0.5rem;
-
-  &:focus {
-    border-color: $lightText;
-  }
-
-  &[type="number"] {
-    width: 2rem;
-  }
-  &[type="text"] {
-    flex-grow: 1;
-  }
-}
+/*
+	----------------------
+	2.  Helper Classes
+	----------------------
+*/
 
 .glassy {
   background: rgba(39, 39, 39, 0.8);
@@ -86,17 +121,12 @@ input {
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
 }
 
-
-.background-img {
-  position: absolute;
-  z-index: -1;
-  max-height: 100vh;
-  min-width: 100vw;
-  filter: brightness(0.3) blur(5px);
-  overflow: none !important;
+.h-wrapper
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-
 
 @import "Item.scss";
 @import "AddItem.scss";

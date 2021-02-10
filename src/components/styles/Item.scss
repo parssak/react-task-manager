@@ -1,9 +1,15 @@
+/* ~ Table of Contents ~
+    1. Item List View
+	2. Item List (Container)
+	3. Item
+    4. Edit Item
+*/
+
 .item-list-view {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width:  $minWidth;
-    // gap: 0.5rem;
 }
 
 .items-container {
@@ -28,7 +34,6 @@
 
     border-radius: 0.25rem;
     transition: height 0.4s ease-in-out;
-    // min-height: 2.3rem;
 
     button {
         $buttonRadius: 15px;
@@ -84,5 +89,12 @@
         font-size: 1.4rem;
         max-width: 10ch;
         text-align: left;
+    }
+
+    .edit-item-top
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 }

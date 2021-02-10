@@ -30,7 +30,7 @@ const Item = ({ item, min, max, updated, selectItem, isSelected }) => {
       {isSelected ? <EditItem itemKey={item.key} cancel={() => selectItem(false)}/> : 
       <div className="item glassy-inner"
         style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: isSelected && 'rgb(45,50,70)' }}
-        onDoubleClick={() => selectItem(isSelected ? null : item.key)}>
+        onClick={() => selectItem(isSelected ? null : item.key)}>
 
         <button onClick={() => removeItem()} />
         <div className="text-wrapper">

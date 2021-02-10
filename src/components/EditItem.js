@@ -57,9 +57,11 @@ const EditItem = ({ itemKey, cancel }) => {
         itemsDispatch({ type: 'EDIT_ITEM', payload })
     }
     return (
-        <div className="edit-item glassy">
-            <button onClick= {() => {cancel()}}>Cancel</button>
-            <EditText className="item-name " inline value={label} onChange={e => setLabel(e)} onSave={updateItem} />
+        <div className="edit-item glassy" onDoubleClick={() => { cancel() }}>
+            <div className="edit-item-top">
+                <EditText className="item-name" inline value={label} onChange={e => setLabel(e)} onSave={updateItem} />
+                <button onClick={() => { cancel() }}>Cancel</button>
+            </div>
             <EditText type='number' className="item-duration" inline value={duration} onChange={e => setDuration(e)} onSave={updateItem} />
             <Select options={options} onChange={(value) => setTag(value)}
                 wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag.label}/>

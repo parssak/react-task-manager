@@ -13,5 +13,6 @@ export default function calculateHeight(duration, minDuration, maxDuration) {
         height *= diff;
     }
     height = height > MAX ? MAX : height;
+    console.log(height);
     return `${height}rem`;
 }
