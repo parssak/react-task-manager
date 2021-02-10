@@ -1,8 +1,9 @@
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
 import ItemsContext from '../context/items-context';
 import calculateHeight from '../helper-functions/calculateHeight'
 import formatTime from '../helper-functions/formatTime'
 import daysIntoYear from '../helper-functions/daysIntoYear';
+import EditItem from './EditItem';
 
 const Item = ({ item, min, max, updated, selectItem, isSelected }) => {
   const { itemsDispatch } = useContext(ItemsContext);
@@ -25,22 +26,26 @@ const Item = ({ item, min, max, updated, selectItem, isSelected }) => {
   }
 
   return (
-    <div className="item glassy-inner"
-      style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: isSelected && 'rgb(45,50,70)' }}
-      onDoubleClick={() => selectItem(isSelected ? null : item.key)}>
-      
-      <button onClick={() => removeItem()} />
-      <div className="text-wrapper">
-        <span className="label">{item.label}</span>
-        <div className="wrap">
-          <span className="duration">{formattedDate}</span>
-          <span className="duration"> | </span>
-          <span className="duration">{formatTime(item.duration)}</span>
-        </div>
-      </div>
-      {item.data.tag.label !== "NULL" && <span className="tag" style={{ backgroundColor: item.data.tag.color }}>{item.data.tag.label}</span>}
+    <> 
+      {isSelected ? <EditItem itemKey={item.key} cancel={() => selectItem(false)}/> : 
+      <div className="item glassy-inner"
+        style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: isSelected && 'rgb(45,50,70)' }}
+        onDoubleClick={() => selectItem(isSelected ? null : item.key)}>
 
-    </div>
+        <button onClick={() => removeItem()} />
+        <div className="text-wrapper">
+          <span className="label">{item.label}</span>
+          <div className="wrap">
+            <span className="duration">{formattedDate}</span>
+            <span className="duration"> | </span>
+            <span className="duration">{formatTime(item.duration)}</span>
+          </div>
+        </div>
+        {item.data.tag.label !== "NULL" && <span className="tag" style={{ backgroundColor: item.data.tag.color }}>{item.data.tag.label}</span>}
+
+      </div>
+      }
+    </>
   );
 };
 

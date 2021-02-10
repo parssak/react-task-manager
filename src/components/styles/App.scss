@@ -1,8 +1,14 @@
-@import 'master.scss';
+@import "master.scss";
 
+html,
 body {
   background-color: $bg;
-  overflow: hidden;
+  // overflow: hidden;
+  // overflow-x:initial;
+  overflow: hidden !important;
+  & > * {
+    overflow: hidden !important;
+  }
 }
 .App {
   display: flex;
@@ -11,22 +17,22 @@ body {
   min-height: 100vh;
   color: $regText;
   text-align: center;
-  overflow: none;
+  overflow: none !important;
 }
 
 .header {
   margin-top: 1rem;
+
   h1 {
     font-size: 1.7rem;
     color: $regText;
   }
   display: flex;
   text-align: left;
-  // flex-grow: 1;
-  // min-width: 40%;
-  width: 100%;
+  width: calc(60%);
   margin-left: 3rem;
 }
+
 button {
   border: none;
   background-color: hsl(260, 7%, 13%);
@@ -34,7 +40,6 @@ button {
   margin-top: 0.1rem;
   border-radius: 0.3rem;
   color: $lightText;
-  transition: all 0.1s ease-in-out;
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
@@ -42,21 +47,13 @@ button {
   margin: 0.5rem 0.3rem;
 }
 
-.add-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.4rem;
-  width: calc(100% - 3rem);
-}
 
 input {
   outline: none;
-  border: solid 1px transparent;
   border-radius: 0.3em;
   background: $inputBg;
   color: $lightText;
-
+  border: 1px solid transparent;
   font-size: 1rem;
   padding: 0.5rem;
 
@@ -89,73 +86,6 @@ input {
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
 }
 
-.selector {
-  border: none;
-  outline: none;
-  background: $inputBg;
-  border: $inputBg !important;
-  color: #fff;
-  border-radius: 0.3rem !important;
-  .react-dropdown-select-clear,
-  .react-dropdown-select-dropdown-handle {
-    color: $lightText;
-  }
-  .react-dropdown-select-option {
-    border: 1px solid #fff;
-  }
-  .react-dropdown-select-item {
-    color: $inputBg;
-  }
-  .react-dropdown-select-input {
-    color: #fff;
-  }
-  .react-dropdown-select-dropdown {
-    border: none;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.3rem;
-    max-height: 300px;
-    overflow: auto;
-    z-index: 9;
-    background: $inputBg;
-    box-shadow: none;
-    margin-top: 0.4rem;
-    box-shadow: 0 3px 0.6rem rgba(0, 0, 0, 0.5);
-  }
-  .react-dropdown-select {
-    border-radius: 2rem !important;
-  }
-  .react-dropdown-select-item {
-    color: #f2f2f2;
-    border-bottom: 1px solid $inputBg;
-
-    :hover {
-      color: #ffffff80;
-    }
-  }
-  .react-dropdown-select-item.react-dropdown-select-item-selected,
-  .react-dropdown-select-item.react-dropdown-select-item-active {
-    border-bottom: 1px solid $inputBg;
-    color: #fff;
-    font-weight: bold;
-  }
-  .react-dropdown-select-item.react-dropdown-select-item-disabled {
-    background: #777;
-    color: #ccc;
-  }
-  outline: none;
-  border: none;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
 
 .background-img {
   position: absolute;
@@ -163,24 +93,10 @@ input[type="number"] {
   max-height: 100vh;
   min-width: 100vw;
   filter: brightness(0.3) blur(5px);
-  overflow: hidden;
+  overflow: none !important;
 }
 
-.date-picker {
-  outline: 0px !important;
-  & > * {
-    border: 1px solid rgba(100, 100, 100, 0.1);
-    border-radius: 0.3rem;
-    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
-    padding: 0.5rem;
-    background-color: $inputBg;
-    // border: 0px transparent !important;
-  }
-}
 
-.date-picker-calendar {
-  border: none;
-  background-color: $bg;
-}
 
-@import 'Item.scss';
+@import "Item.scss";
+@import "AddItem.scss";

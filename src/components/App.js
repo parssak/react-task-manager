@@ -7,6 +7,8 @@ import ItemList from './ItemList';
 import Header from './Header';
 import Settings from './Settings';
 import EditItem from './EditItem';
+import ItemListView from './ItemListView';
+import Sidebar from './Sidebar';
 
 const DURATION = "DURATION";
 const DATE = "DATE";
@@ -48,11 +50,8 @@ function App() {
         <Header />
         {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />}
         {toggleForm && <AddItemForm />}
-        <div className="h-wrapper">
-<ItemList sort={sort} select={selectItem} selectedItem={selectedItem}/>
-        {selectedItem !== null && <EditItem itemKey={selectedItem}/>}
-        </div>
-        
+        <ItemListView sort={sort} selectItem={selectItem} selectedItem={selectedItem} />
+        {/* <Sidebar collapsed={toggleForm} /> */}
         <Settings toggleAddForm={toggleAddForm} setSort={setSort} toggleForm={toggleForm} toggleWallpaper={toggleWallpaper} sortOptions={sortOptions} />
       </div>
     </ItemsContext.Provider>

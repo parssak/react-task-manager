@@ -6,7 +6,7 @@ import getDateValues from '../helper-functions/getDateValues';
 import Select from "react-dropdown-select";
 import { options } from '../helper-functions/options';
 
-const EditItem = ({ itemKey }) => {
+const EditItem = ({ itemKey, cancel }) => {
     const { items, itemsDispatch } = useContext(ItemsContext);
     const [tag, setTag] = useState('');
     const [label, setLabel] = useState("");
@@ -58,7 +58,8 @@ const EditItem = ({ itemKey }) => {
     }
     return (
         <div className="edit-item glassy">
-            <EditText className="item-name" inline value={label} onChange={e => setLabel(e)} onSave={updateItem} />
+            <button onClick= {() => {cancel()}}>Cancel</button>
+            <EditText className="item-name " inline value={label} onChange={e => setLabel(e)} onSave={updateItem} />
             <EditText type='number' className="item-duration" inline value={duration} onChange={e => setDuration(e)} onSave={updateItem} />
             <Select options={options} onChange={(value) => setTag(value)}
                 wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag.label}/>

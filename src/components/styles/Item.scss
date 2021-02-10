@@ -1,17 +1,16 @@
-.h-wrapper {
+.item-list-view {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 100%;
-
-    gap: 0.5rem;
+    min-width:  $minWidth;
+    // gap: 0.5rem;
 }
 
 .items-container {
-    margin: 1rem;
     padding: 0 0.5rem;
     flex-grow: 3;
     overflow-y: auto;
+
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
     &::-webkit-scrollbar {
@@ -29,7 +28,7 @@
 
     border-radius: 0.25rem;
     transition: height 0.4s ease-in-out;
-    min-height: 2.3rem;
+    // min-height: 2.3rem;
 
     button {
         $buttonRadius: 15px;
@@ -52,7 +51,7 @@
 
     .duration {
         color: $lightText;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
     }
 
     .text-wrapper {
@@ -63,23 +62,15 @@
     }
 
     .label {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         font-weight: 600;
     }
 }
 
 .edit-item {
-    position: relative;
-    min-width: 10rem;
-    flex-grow: 1;
-    //   height: 100vh;
-    //   right: 0;
-    //   bottom: 0;
-    //   top: 0;
-    //   margin: auto;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
     transition: width 5s ease;
-    transform: scale(1);
-    padding: 1rem;
     & > * {
         margin: 0.5rem;
     }
