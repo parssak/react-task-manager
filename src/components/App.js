@@ -48,7 +48,7 @@ function App() {
     <ItemsContext.Provider value={{ items, itemsDispatch }}>
       <div className="App">
         <Header />
-        {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />}
+        {/* {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />} */}
         {toggleForm && <AddItemForm />}
         <ItemListView sort={sort} selectItem={selectItem} selectedItem={selectedItem} />
         {/* <Sidebar collapsed={toggleForm} /> */}

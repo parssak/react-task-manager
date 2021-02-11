@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width:  $minWidth;
+    min-width: $minWidth;
 }
 
 .items-container {
@@ -29,11 +29,10 @@
     padding: 0.8rem;
     margin: 0.5rem 0;
     display: flex;
-    align-items: center;
     gap: 0.5rem;
 
     border-radius: 0.25rem;
-    transition: height 0.4s ease-in-out;
+    transition: all 0.2s;
 
     button {
         $buttonRadius: 15px;
@@ -51,7 +50,6 @@
         border-radius: 0.4em;
         font-weight: 600;
         letter-spacing: -0.04rem;
-        margin-left: auto;
     }
 
     .duration {
@@ -61,13 +59,21 @@
 
     .text-wrapper {
         display: flex;
-        align-items: flex-start;
-        justify-content: space-around;
+        align-items: baseline;
+        justify-content: space-between;
         flex-direction: column;
     }
 
+    .center-align {
+        display: flex;
+        align-items: center;
+        &.tag {
+            margin-left: auto;
+        }
+    }
+
     .label {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         font-weight: 600;
     }
 }
@@ -91,8 +97,12 @@
         text-align: left;
     }
 
-    .edit-item-top
-    {
+    .edit-item-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .edit-item-bottom {
         display: flex;
         align-items: center;
         justify-content: space-between;

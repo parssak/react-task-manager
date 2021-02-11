@@ -63,9 +63,11 @@ const EditItem = ({ itemKey, cancel }) => {
                 <button onClick={() => { cancel() }}>Cancel</button>
             </div>
             <EditText type='number' className="item-duration" inline value={duration} onChange={e => setDuration(e)} onSave={updateItem} />
-            <Select options={options} onChange={(value) => setTag(value)}
-                wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag.label}/>
-            <DatePicker onChange={changeDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName="date-picker-calendar" className="date-picker" />
+            <div className="edit-item-top">
+                <Select options={options} onChange={(value) => setTag(value)}
+                    wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag.label} />
+                <DatePicker onChange={changeDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName="date-picker-calendar" className="date-picker" />
+            </div>
         </div>
     );
 }

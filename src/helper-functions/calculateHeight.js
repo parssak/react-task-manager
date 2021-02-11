@@ -1,5 +1,5 @@
-const GROWBASE = 6;      // rem
-const MAX = 13;
+const GROWBASE = 10;      // rem
+const MAX = 15;
 const BASELINE = 0.5;  // rem
 
 export default function calculateHeight(duration, minDuration, maxDuration) {
