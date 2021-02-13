@@ -1,5 +1,5 @@
-const GROWBASE = 10;      // rem
-const MAX = 15;
+const GROWBASE = 7;      // rem
+const MAX = 20;
 const BASELINE = 0.5;  // rem
 
 export default function calculateHeight(duration, minDuration, maxDuration) {
@@ -13,6 +13,5 @@ export default function calculateHeight(duration, minDuration, maxDuration) {
         height *= diff;
     }
     height = height > MAX ? MAX : height;
-    console.log(height);
     return `${height}rem`;
 }

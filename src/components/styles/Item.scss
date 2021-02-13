@@ -32,7 +32,7 @@
     gap: 0.5rem;
     border-radius: 0.25rem;
     transition: all 0.2s;   
-    
+
     button {
         $buttonRadius: 15px;
         height: $buttonRadius;
@@ -116,4 +116,19 @@
     width: fit-content !important;
     height: fit-content !important;
     border-radius: 0.3rem !important;
+}
+
+.child {
+    // padding: 0.5rem;
+    & > * {
+        border-radius: 1rem;
+    }
+}
+
+.parent {
+    // display: flex;
+    // flex-direction: row !important;
+    // &:last-child {
+    //     margin-top: auto;
+    // }
 }

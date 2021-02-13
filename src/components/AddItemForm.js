@@ -6,7 +6,7 @@ import DatePicker from 'react-date-picker';
 import getDateValues from '../helper-functions/getDateValues';
 import { options } from '../helper-functions/options';
 
-const createItem = (label, duration, tag, date) => {
+const createItem = (label, duration, tag, date, parent) => {
   const [day, month, year, dayOfWeek, formattedDate, dateString, dayInYear] = getDateValues(date);
   const item = {
     label: label,
@@ -22,7 +22,9 @@ const createItem = (label, duration, tag, date) => {
         formattedDate,
         dateString,
         dayInYear
-      }
+      },
+      parent: parent,
+      children: []
     },
     key: uuidv4()
   }
@@ -33,7 +35,7 @@ const createItem = (label, duration, tag, date) => {
 
 const defaultDur = 30;
 
-const AddItemForm = () => {
+const AddItemForm = ({subtaskKey, addedSubtask}) => {
   const [label, setLabel] = useState('');
   const [duration, setDuration] = useState(defaultDur);
   const [tag, setTag] = useState('');
@@ -46,9 +48,13 @@ const AddItemForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (label === '') return;
-    const item = createItem(label, duration, tag, date);
+    const item = createItem(label, duration, tag, date, subtaskKey);
+    console.log("made >>>",item);
     itemsDispatch({ type: 'ADD_ITEM', item });
     setLabel('');
+    if (subtaskKey !== '') {
+      addedSubtask(item.key);
+    }
   };
 
   const handleKeyPress = e => {

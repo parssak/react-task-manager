@@ -7,7 +7,7 @@ const UpdateItemsPrompt = ({ tasks }) => {
 
     function moveAllToToday() {
         tasks.forEach(task => {
-            const payload = modifyItem(task.label, task.duration, task.data.tag, new Date(), task.key);
+            const payload = modifyItem(task.label, task.duration, task.data.tag, new Date(), task.data.children, task.data.parent,task.key);
             itemsDispatch({ type: 'EDIT_ITEM', payload })
         })
     }

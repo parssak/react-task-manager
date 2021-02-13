@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import ItemsContext from '../context/items-context';
 import Item from './Item';
 import daysIntoYear from '../helper-functions/daysIntoYear';
-
+import modifyItem from '../helper-functions/modifyItem';
 function recalculateSizes(items) {
   let a = 9999;
   let b = -1;
@@ -15,7 +15,7 @@ function recalculateSizes(items) {
 }
 
 const ItemList = ({ sort, select, selectedItem }) => {
-  const { items } = useContext(ItemsContext);
+  const { items, itemsDispatch } = useContext(ItemsContext);
   const [, setToggle] = useState(true);
   const today = daysIntoYear(new Date());
   let [min, max] = recalculateSizes(items);
@@ -45,16 +45,25 @@ const ItemList = ({ sort, select, selectedItem }) => {
       break;
   }
 
+  // useEffect(() => {
+    items.filter((item) => item.data.parent !== '').forEach(item => {
+      if (items.filter(a => a.key === item.data.parent).length === 0) {
+        const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, [], '', item.key);
+        itemsDispatch({ type: 'EDIT_ITEM', payload })
+      }
+    })
+  // }, []);
+
   return (
     <div className="items-container glassy">
       {
         (sort === "TODAY") ?
           items.filter((item) => item.data.date.dayInYear - today === 0)
             .map((item) => (
-              <Item key={item.key} item={item} min={min} max={max} updated={updated} selectItem={select} isSelected={item.key === selectedItem} />
+              <Item key={item.key} item={item} min={min} max={max} updated={updated} selectItem={select} selectedItem={selectedItem} />
             )) :
-          items.map((item) => (
-            <Item key={item.key} item={item} min={min} max={max} updated={updated} selectItem={select} isSelected={item.key === selectedItem} />
+          items.filter((item) => item.data.parent === '').map((item) => (
+            <Item key={item.key} item={item} min={min} max={max} updated={updated} selectItem={select} selectedItem={selectedItem} />
           ))
       }
     </div>

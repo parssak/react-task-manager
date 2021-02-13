@@ -5,7 +5,6 @@ const ItemListView = ({ sort, selectItem, selectedItem }) => {
 
     return (
         <div className="item-list-view" >
-
             <ItemList sort={sort} select={selectItem} selectedItem={selectedItem} />
         </div>
     );

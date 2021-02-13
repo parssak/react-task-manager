@@ -9,7 +9,6 @@ const itemsReducer = (state, action) => {
     case 'EDIT_ITEM': // todo
       return state.map(item => {
         if (item.key === action.payload.key) {
-          console.log("New payload:",action.payload);
           item = action.payload; 
         }
         return item;
