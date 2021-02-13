@@ -44,7 +44,6 @@ input {
   }
 }
 
-
 button {
   border: none;
   background-color: hsl(260, 7%, 13%);
@@ -52,6 +51,8 @@ button {
   margin-top: 0.1rem;
   border-radius: 0.3rem;
   color: $lightText;
+        transition: all 0.2s;
+
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
@@ -88,7 +89,6 @@ button {
   margin-left: 3rem;
 }
 
-
 .background-img {
   position: absolute;
   z-index: -1;
@@ -121,11 +121,16 @@ button {
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
 }
 
-.h-wrapper
-{
+.h-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.update-items-prompt {
+  min-width: 30%;
+  position: absolute;
+  bottom: 15rem;
 }
 
 @import "Item.scss";

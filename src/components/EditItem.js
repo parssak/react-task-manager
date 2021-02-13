@@ -5,8 +5,10 @@ import DatePicker from 'react-date-picker';
 import getDateValues from '../helper-functions/getDateValues';
 import Select from "react-dropdown-select";
 import { options } from '../helper-functions/options';
+import AddItemForm from './AddItemForm';
+import modifyItem from '../helper-functions/modifyItem';
 
-const EditItem = ({ itemKey, cancel }) => {
+const EditItem = ({ itemKey, cancel, addingSubtask }) => {
     const { items, itemsDispatch } = useContext(ItemsContext);
     const [tag, setTag] = useState('');
     const [label, setLabel] = useState("");
@@ -31,29 +33,11 @@ const EditItem = ({ itemKey, cancel }) => {
 
     useEffect(() => {
         updateItem()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [date, tag])
 
     const updateItem = () => {
-        const [day, month, year, dayOfWeek, formattedDate, dateString, dayInYear] = getDateValues(date);
-        console.log(day, month, year, dayOfWeek, tag[0]);
-        const payload = {
-            key: itemKey,
-            label: label,
-            duration: duration,
-            data: {
-                tag: tag[0] || tag,
-                date: {
-                    day,
-                    month,
-                    year,
-                    dayOfWeek,
-                    formattedDate,
-                    dateString,
-                    dayInYear
-                }
-            }
-        }
-        console.log("New payload is:", payload)
+        const payload = modifyItem(label, duration, tag[0] || tag, date, itemKey);
         itemsDispatch({ type: 'EDIT_ITEM', payload })
     }
     return (
@@ -62,6 +46,7 @@ const EditItem = ({ itemKey, cancel }) => {
                 <EditText className="item-name" inline value={label} onChange={e => setLabel(e)} onSave={updateItem} />
                 <button onClick={() => { cancel() }}>Cancel</button>
             </div>
+            {addingSubtask && <AddItemForm/>}
             <EditText type='number' className="item-duration" inline value={duration} onChange={e => setDuration(e)} onSave={updateItem} />
             <div className="edit-item-top">
                 <Select options={options} onChange={(value) => setTag(value)}

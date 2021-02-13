@@ -5,7 +5,7 @@ const itemsReducer = (state, action) => {
     case 'ADD_ITEM':
       return [...state, action.item];
     case 'REMOVE_ITEM':
-      return state.filter((item) => item !== action.itemToBeDeleted);
+      return state.filter((item) => item.key !== action.itemToBeDeleted);
     case 'EDIT_ITEM': // todo
       return state.map(item => {
         if (item.key === action.payload.key) {

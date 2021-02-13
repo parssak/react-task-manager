@@ -30,10 +30,9 @@
     margin: 0.5rem 0;
     display: flex;
     gap: 0.5rem;
-
     border-radius: 0.25rem;
-    transition: all 0.2s;
-
+    transition: all 0.2s;   
+    
     button {
         $buttonRadius: 15px;
         height: $buttonRadius;
@@ -43,6 +42,10 @@
         &:hover {
             cursor: pointer;
         }
+    }
+
+    & > * {
+        margin: 0 0;
     }
 
     .tag {
@@ -81,8 +84,7 @@
 .edit-item {
     padding: 0.8rem;
     margin: 0.5rem 0;
-    transition: width 5s ease;
-    & > * {
+    & > * { 
         margin: 0.5rem;
     }
     .item-name {
@@ -107,4 +109,11 @@
         align-items: center;
         justify-content: space-between;
     }
+}
+
+
+.add-subtask {
+    width: fit-content !important;
+    height: fit-content !important;
+    border-radius: 0.3rem !important;
 }

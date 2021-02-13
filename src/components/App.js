@@ -3,12 +3,12 @@ import ItemsContext from '../context/items-context';
 import itemsReducer from '../reducers/items';
 import AddItemForm from './AddItemForm';
 import './styles/App.scss';
-import ItemList from './ItemList';
 import Header from './Header';
 import Settings from './Settings';
-import EditItem from './EditItem';
 import ItemListView from './ItemListView';
-import Sidebar from './Sidebar';
+import UpdateItemsPrompt from './UpdateItemsPrompt';
+import getTodayInYear from '../helper-functions/getTodayInYear';
+
 
 const DURATION = "DURATION";
 const DATE = "DATE";
@@ -19,10 +19,12 @@ const sortOptions = [DURATION, DATE, TAG, TODAY];
 
 function App() {
   const [items, itemsDispatch] = useReducer(itemsReducer, []);
-  const [toggleForm, setToggleForm] = useState(true);
+  const [focusMode, setFocusMode] = useState(true);
   const [wallpaper, toggleWallpaper] = useState(true);
   const [sort, setSort] = useState(sortOptions[2]);
   const [selectedItem, setSelectedItem] = useState(null);
+
+  const [oldTasks, setOldTasks] = useState([]);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('items'));
@@ -33,14 +35,15 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
+    console.log(getTodayInYear());
+    setOldTasks(items.filter(item => item.data.date.dayInYear < getTodayInYear())); 
   }, [items]);
 
   function toggleAddForm() {
-    setToggleForm(toggleForm => !toggleForm);
+    setFocusMode(focusMode => !focusMode);
   }
 
   function selectItem(key) {
-    console.log("selected ", key);
     setSelectedItem(key);
   }
 
@@ -48,11 +51,11 @@ function App() {
     <ItemsContext.Provider value={{ items, itemsDispatch }}>
       <div className="App">
         <Header />
-        {/* {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />} */}
-        {toggleForm && <AddItemForm />}
+        {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />}
+        {focusMode && <AddItemForm />}
         <ItemListView sort={sort} selectItem={selectItem} selectedItem={selectedItem} />
-        {/* <Sidebar collapsed={toggleForm} /> */}
-        <Settings toggleAddForm={toggleAddForm} setSort={setSort} toggleForm={toggleForm} toggleWallpaper={toggleWallpaper} sortOptions={sortOptions} />
+        {oldTasks.length > 0 && <UpdateItemsPrompt tasks={ oldTasks}/>}
+        <Settings toggleAddForm={toggleAddForm} setSort={setSort} toggleForm={focusMode} toggleWallpaper={toggleWallpaper} sortOptions={sortOptions} />
       </div>
     </ItemsContext.Provider>
   );

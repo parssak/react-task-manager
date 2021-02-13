@@ -8,7 +8,6 @@ import { options } from '../helper-functions/options';
 
 const createItem = (label, duration, tag, date) => {
   const [day, month, year, dayOfWeek, formattedDate, dateString, dayInYear] = getDateValues(date);
-  
   const item = {
     label: label,
     duration: duration,
@@ -29,6 +28,8 @@ const createItem = (label, duration, tag, date) => {
   }
   return item;
 }
+
+
 
 const defaultDur = 30;
 
