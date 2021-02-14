@@ -36,7 +36,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
-    setOldTasks(items.filter(item => item.data.date.dayInYear < getTodayInYear())); 
+    setOldTasks(items.filter(item => item.data.date.dayInYear < getTodayInYear()));
   }, [items]);
 
   function toggleAddForm() {
@@ -51,14 +51,12 @@ function App() {
     <ItemsContext.Provider value={{ items, itemsDispatch }}>
       <div className="App">
         <Header />
-        
+
         {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />}
         {focusMode && <AddItemForm subtaskKey={''} />}
-        {selectedItem &&
-          <EditItem itemKey={selectedItem} cancel={() => selectItem(false)} />
-        }
+        {selectedItem && <EditItem itemKey={selectedItem} cancel={() => selectItem(false)} />}
         <ItemListView sort={sort} selectItem={selectItem} selectedItem={selectedItem} />
-        {oldTasks.length > 0 && <UpdateItemsPrompt tasks={ oldTasks}/>}
+        {oldTasks.length > 0 && <UpdateItemsPrompt tasks={oldTasks} />}
         <Settings toggleAddForm={toggleAddForm} setSort={setSort} toggleForm={focusMode} toggleWallpaper={toggleWallpaper} sortOptions={sortOptions} />
       </div>
     </ItemsContext.Provider>

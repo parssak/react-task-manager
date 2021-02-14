@@ -19,6 +19,11 @@ const EditItem = ({ itemKey, cancel }) => {
     useEffect(() => {
         // set up
         const selectedItem = items.filter(item => item.key === itemKey)[0];
+        if (selectedItem === undefined) {
+            cancel()
+            return
+        }
+        console.log(selectedItem);
         setLabel(selectedItem.label);
         setDuration(selectedItem.duration);
         let date = new Date(`${selectedItem.data.date.month.substring(0, 3)} ${selectedItem.data.date.day}, ${selectedItem.data.date.year}`)
@@ -33,7 +38,6 @@ const EditItem = ({ itemKey, cancel }) => {
     const changeDate = e => {
         setDate(e);
     }
-
 
     function addedSubtask(childKey) {
         console.log("added subtask ", childKey);
@@ -60,8 +64,7 @@ const EditItem = ({ itemKey, cancel }) => {
             <AddItemForm subtaskKey={itemKey} addedSubtask={addedSubtask}/>
             <EditText type='number' className="item-duration" inline value={duration} onChange={e => setDuration(e)} onSave={updateItem} />
             <div className="edit-item-top">
-                <Select options={options} onChange={(value) => setTag(value)}
-                    wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag.label} />
+                <Select options={options} onChange={(value) => setTag(value)} wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag.label} />
                 <DatePicker onChange={changeDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName="date-picker-calendar" className="date-picker" />
             </div>
         </div>

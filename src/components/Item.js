@@ -31,55 +31,82 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className }) 
     itemsDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: key });
   }
 
-  if (item.data.children.length > 0) {
-    const children = items.filter(a => a.data.parent === item.key);
-    if (children.length === 0) {
-      const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, [], item.data.parent, item.key);
+  const children = items.filter(a => a.data.parent === item.key);
+
+  // if (children.length === 0 && item.data.children.length > 0) {
+  //   const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, [], item.data.parent, item.key);
+  //   itemsDispatch({ type: 'EDIT_ITEM', payload })
+  // // }
+
+  // if (children.length > 0 && item.data.children.length === 0) {
+  //   let newArray = [];
+  //   children.forEach(child => newArray.push(child.key));
+  //   const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, newArray, item.data.parent, item.key);
+  //   itemsDispatch({ type: 'EDIT_ITEM', payload })
+  //   console.log("pay more child support. ", newArray);
+  // }
+
+  const drop = e => {
+    e.preventDefault();
+    const card_id = e.dataTransfer.getData('card_id');
+    if (card_id !== item.key && card_id !== item.data.parent && !item.data.children.includes(card_id)) {
+      console.log("dropped", card_id, "on me,", item.label);
+      console.log([...item.data.children, card_id]);
+      const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, [...item.data.children,card_id], item.data.parent, item.key);
       itemsDispatch({ type: 'EDIT_ITEM', payload })
     }
   }
 
+  const dragStart = e => {
+    const target = e.target;
+    e.dataTransfer.setData('card_id', target.id);
+    setTimeout(() => { }, 0)
+  }
+
   return (
     <div className={className}>
-      {/* {item.key === selectedItem ? <EditItem itemKey={item.key} cancel={() => selectItem(false)} addingSubtask={addSubtask} /> : */}
-          <div className="item glassy-inner"
-            style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: hovering && 'rgb(45,50,70)' }}
-            onClick={e => {
-              if (!e) var e = window.event;
-              e.cancelBubble = true;
-              if (e.stopPropagation) e.stopPropagation();
-              selectItem(item.key === selectedItem ? null : item.key);
-            }}
-            onMouseOver={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-          >
-            <div className="text-wrapper">
-              <div className="h-wrapper">
-                {
-                  hovering ?
-                    <div className="center-align">
-                      <button onClick={() => removeItem(item.key)} />
-                      <span className="label">{item.label}</span>
-                    </div> :
-                    <span className="label">{item.label}</span>
-                }
-              </div>
-              <div className="wrap">
-                <span className="duration">{formattedDate}</span>
-                <span className="duration"> | </span>
-                <span className="duration">{formatTime(item.duration)}</span>
-              </div>
-            </div>
-            <div className="children">
-              {items.filter(a => a.data.parent === item.key).map((b) => (
-                <Item itemKey={b.key} item={b} updated={updated} selectedItem={selectedItem} selectItem={selectItem} key={b.key} className="child" />
-              ))}
-            </div>
-            <div className="center-align tag">
-              {hovering && item.data.parent === '' && <button className="add-subtask" onClick={e => setAddSubtask(true)}>Add subtask</button>}
-              {item.data.tag.label !== "NULL" && <span className="tag" style={{ backgroundColor: item.data.tag.color }}>{item.data.tag.label}</span>}
-            </div>
+      <div className="item glassy-inner" id={item.key}
+        style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: hovering && 'rgb(45,50,70)' }}
+        onClick={e => {
+          if (!e) e = window.event;
+          e.cancelBubble = true;
+          if (e.stopPropagation) e.stopPropagation();
+          selectItem(item.key === selectedItem ? null : item.key);
+        }}
+        onMouseOver={e => { e.stopPropagation(); setHovering(true); }}
+        onMouseLeave={e => { e.stopPropagation(); setHovering(false); }}
+        draggable="true"
+        onDragOver={e => e.preventDefault()}
+        onDragStart={e => dragStart(e)}
+        onDrop={e => drop(e)}
+      >
+        <div className="text-wrapper">
+          <div className="h-wrapper">
+            {
+              hovering ?
+                <div className="center-align">
+                  <button onClick={() => removeItem(item.key)} />
+                  <span className="label">{item.label}</span>
+                </div> :
+                <span className="label">{item.label}</span>
+            }
           </div>
+          <div className="wrap">
+            <span className="duration">{formattedDate}</span>
+            <span className="duration"> | </span>
+            <span className="duration">{formatTime(item.duration)}</span>
+          </div>
+        </div>
+        <div className="children">
+          {items.filter(a => a.data.parent === item.key).map((b) => (
+            <Item itemKey={b.key} item={b} updated={updated} selectedItem={selectedItem} selectItem={selectItem} key={b.key} className="child" />
+          ))}
+        </div>
+        <div className="center-align tag">
+          {hovering && item.data.parent === '' && <button className="add-subtask" onClick={e => setAddSubtask(true)}>Add subtask</button>}
+          {item.data.tag.label !== "NULL" && <span className="tag" style={{ backgroundColor: item.data.tag.color }}>{item.data.tag.label}</span>}
+        </div>
+      </div>
       {/* } */}
     </div>
   );
