@@ -7,7 +7,7 @@ const UpdateItemsPrompt = ({ tasks }) => {
 
     function moveAllToToday() {
         tasks.forEach(task => {
-            const payload = modifyItem(task.label, task.duration, task.data.tag, new Date(), task.data.children, task.data.parent,task.key);
+            const payload = modifyItem(task.label, task.duration, task.data.tag, new Date(), task.data.children, task.data.parent, task.key);
             itemsDispatch({ type: 'EDIT_ITEM', payload })
         })
     }
@@ -27,7 +27,7 @@ const UpdateItemsPrompt = ({ tasks }) => {
                             <div className="center-align">
                                 <button onClick={() => complete(item.key)}></button>
                             </div>
-                            
+
                             <div className="center-align label">{item.label}</div>
                             <div className="center-align tag">
                                 {item.data.tag.label !== "NULL" && <span className="tag" style={{ backgroundColor: item.data.tag.color }}>{item.data.tag.label}</span>}
@@ -36,7 +36,7 @@ const UpdateItemsPrompt = ({ tasks }) => {
                     ))
                 }
             </div>
-            <button className="glassy-inner"onClick={() => moveAllToToday()}>Move tasks to today</button>
+            <button className="glassy-inner" onClick={() => moveAllToToday()}>Move tasks to today</button>
         </div>
     );
 }

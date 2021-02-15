@@ -31,29 +31,19 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className }) 
     itemsDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: key });
   }
 
-  const children = items.filter(a => a.data.parent === item.key);
-
-  // if (children.length === 0 && item.data.children.length > 0) {
-  //   const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, [], item.data.parent, item.key);
-  //   itemsDispatch({ type: 'EDIT_ITEM', payload })
-  // // }
-
-  // if (children.length > 0 && item.data.children.length === 0) {
-  //   let newArray = [];
-  //   children.forEach(child => newArray.push(child.key));
-  //   const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, newArray, item.data.parent, item.key);
-  //   itemsDispatch({ type: 'EDIT_ITEM', payload })
-  //   console.log("pay more child support. ", newArray);
-  // }
-
   const drop = e => {
     e.preventDefault();
     const card_id = e.dataTransfer.getData('card_id');
     if (card_id !== item.key && card_id !== item.data.parent && !item.data.children.includes(card_id)) {
-      console.log("dropped", card_id, "on me,", item.label);
-      console.log([...item.data.children, card_id]);
-      const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, [...item.data.children,card_id], item.data.parent, item.key);
-      itemsDispatch({ type: 'EDIT_ITEM', payload })
+      // console.log("dropped", card_id, "on me,", item.label);
+      // console.log([...item.data.children, card_id]);
+      console.log("CALLED DROP");
+      const payload = {
+        parent: item.key,
+        child: card_id
+      }
+      // const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, [...item.data.children, card_id], item.data.parent, item.key);
+      itemsDispatch({ type: 'ADD_CHILD', payload })
     }
   }
 
@@ -86,20 +76,20 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className }) 
               hovering ?
                 <div className="center-align">
                   <button onClick={() => removeItem(item.key)} />
-                  <span className="label">{item.label}</span>
+                  <span className={`label ${item.data.children.length > 0 && 'parent-label'}`}>{item.label}</span>
                 </div> :
-                <span className="label">{item.label}</span>
+                <span className={`label ${item.data.children.length > 0 && 'parent-label'}`}>{item.label}</span>
             }
           </div>
           <div className="wrap">
             <span className="duration">{formattedDate}</span>
-            <span className="duration"> | </span>
-            <span className="duration">{formatTime(item.duration)}</span>
+            {item.data.children.length === 0 && <span className="duration"> | </span>}
+            {item.data.children.length === 0 && <span className="duration">{formatTime(item.duration)}</span>}
           </div>
         </div>
         <div className="children">
           {items.filter(a => a.data.parent === item.key).map((b) => (
-            <Item itemKey={b.key} item={b} updated={updated} selectedItem={selectedItem} selectItem={selectItem} key={b.key} className="child" />
+            <Item itemKey={b.key} item={b} min={min} max={max} updated={updated} selectedItem={selectedItem} selectItem={selectItem} key={b.key} className="child" />
           ))}
         </div>
         <div className="center-align tag">
@@ -107,7 +97,6 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className }) 
           {item.data.tag.label !== "NULL" && <span className="tag" style={{ backgroundColor: item.data.tag.color }}>{item.data.tag.label}</span>}
         </div>
       </div>
-      {/* } */}
     </div>
   );
 };

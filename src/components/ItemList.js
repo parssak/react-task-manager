@@ -15,7 +15,7 @@ function recalculateSizes(items) {
 }
 
 const ItemList = ({ sort, select, selectedItem }) => {
-  const { items, itemsDispatch } = useContext(ItemsContext);
+  const { items } = useContext(ItemsContext);
   const [, setToggle] = useState(true);
   const today = daysIntoYear(new Date());
   let [min, max] = recalculateSizes(items);
@@ -45,17 +45,10 @@ const ItemList = ({ sort, select, selectedItem }) => {
       break;
   }
 
-  items.filter((item) => item.data.parent !== '').forEach(item => {
-    if (items.filter(a => a.key === item.data.parent).length === 0) {
-      const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, [], '', item.key);
-      itemsDispatch({ type: 'EDIT_ITEM', payload })
-    }
-  })
-
   return (
     <div className="items-container glassy">
-      <button onClick={() => console.log(items)}>Print items</button>
-      <button onClick={() => itemsDispatch({ type: 'CLEAR_ALL', payload: null })}>Clear items</button>
+      {/* <button onClick={() => console.log(items)}>Print items</button>
+      <button onClick={() => itemsDispatch({ type: 'CLEAR_ALL', payload: null })}>Clear items</button> */}
       {
         (sort === "TODAY") ?
           items.filter((item) => item.data.date.dayInYear - today === 0)

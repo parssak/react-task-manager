@@ -35,7 +35,7 @@ const createItem = (label, duration, tag, date, parent) => {
 
 const defaultDur = 30;
 
-const AddItemForm = ({subtaskKey, addedSubtask}) => {
+const AddItemForm = ({subtaskKey, addedSubtask, addingSubtask}) => {
   const [label, setLabel] = useState('');
   const [duration, setDuration] = useState(defaultDur);
   const [tag, setTag] = useState('');
@@ -68,7 +68,7 @@ const AddItemForm = ({subtaskKey, addedSubtask}) => {
   return (
     <div className="add-item glassy">
       <input type="text" value={label} onChange={e => setLabel(e.target.value)}
-        onKeyDown={e => handleKeyPress(e)} className="glassy-inner"/> 
+        onKeyDown={e => handleKeyPress(e)} className="glassy-inner" placeholder={addingSubtask ? 'Add subtask...' : 'Add task'}/> 
       <input type="number" value={duration} onChange={e => setDuration(e.target.value)}
         onKeyPress={e => e.key === "Enter" && handleSubmit(e)} className="glassy-inner"/>
       <Select options={options} onChange={(value) => setTag(value)}

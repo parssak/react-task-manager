@@ -76,8 +76,10 @@
     }
 
     .label {
+        color: rgb(207, 207, 207);
         font-size: 1.5rem;
         font-weight: 600;
+        text-transform: capitalize;
     }
 }
 
@@ -125,10 +127,9 @@
     }
 }
 
-.parent {
-    // display: flex;
-    // flex-direction: row !important;
-    // &:last-child {
-    //     margin-top: auto;
-    // }
+.parent-label {
+    color: rgb(206, 206, 206) !important;
+    font-weight: 700 !important;
+    margin-right: 1rem;
+    
 }
