@@ -7,11 +7,23 @@
 
 .add-item {
     display: flex;
-    min-width: calc(60% - 1rem);
     gap: 0.4rem;
     margin-bottom: 1rem;
+    padding: none !important;
+    overflow:visible;
+}
+::-webkit-scrollbar {
+    display: hidden;
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox 64 */
 }
 
+.group {
+    display: flex;
+    gap: 0.4rem;
+}
 // TAB INPUT
 .selector {
     border: none;
@@ -76,6 +88,9 @@
 
 // DATE PICKER
 .date-picker {
+    //  @media screen and (max-width: 700px) {
+    //     display: none;
+    // }
     outline: 0px !important;
     & > * {
         border: 1px solid rgba(100, 100, 100, 0.1);

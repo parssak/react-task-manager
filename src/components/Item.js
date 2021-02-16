@@ -6,7 +6,7 @@ import daysIntoYear from '../helper-functions/daysIntoYear';
 import EditItem from './EditItem';
 import modifyItem from '../helper-functions/modifyItem';
 
-const Item = ({ item, min, max, updated, selectItem, selectedItem, className }) => {
+const Item = ({ item, min, max, updated, selectItem, selectedItem, className, colorful }) => {
   const { items, itemsDispatch } = useContext(ItemsContext);
   const today = daysIntoYear(new Date());
   const [hovering, setHovering] = useState(false);
@@ -52,14 +52,17 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className }) 
     e.dataTransfer.setData('card_id', target.id);
     setTimeout(() => { }, 0)
   }
-
+  //backgroundColor: hovering && 'rgb(45,50,70)'
   return (
     <div className={className}>
       <div className="item glassy-inner" id={item.key}
-        style={{ minHeight: calculateHeight(item.duration, min, max), backgroundColor: hovering && 'rgb(45,50,70)' }}
+        style={{
+          minHeight: calculateHeight(item.duration, min, max),
+          backgroundColor: colorful && item.data.tag.label !== "NULL" && item.data.tag.color
+        }}
         onClick={e => {
           if (!e) e = window.event;
-          e.cancelBubble = true;
+          e.cancelBubble = true; 
           if (e.stopPropagation) e.stopPropagation();
           selectItem(item.key === selectedItem ? null : item.key);
         }}
@@ -89,7 +92,7 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className }) 
         </div>
         <div className="children">
           {items.filter(a => a.data.parent === item.key).map((b) => (
-            <Item itemKey={b.key} item={b} min={min} max={max} updated={updated} selectedItem={selectedItem} selectItem={selectItem} key={b.key} className="child" />
+            <Item itemKey={b.key} item={b} min={min} max={max} updated={updated} selectedItem={selectedItem} selectItem={selectItem} key={b.key} className="child" colorful/>
           ))}
         </div>
         <div className="center-align tag">

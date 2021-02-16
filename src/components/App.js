@@ -8,23 +8,17 @@ import Settings from './Settings';
 import ItemListView from './ItemListView';
 import UpdateItemsPrompt from './UpdateItemsPrompt';
 import getTodayInYear from '../helper-functions/getTodayInYear';
-import EditItem from './EditItem';
+import combineReducers from 'react-combine-reducers';
 
-
-const DURATION = "DURATION";
-const DATE = "DATE";
-const TAG = "TAG";
-const TODAY = "TODAY";
-
-const sortOptions = [DURATION, DATE, TAG, TODAY];
+// const [items, itemsDispatch] = useReducer(itemsReducer, []);
+const [rootReducerCombined, initialStateCombined] =
+  combineReducers({ items: [itemsReducer, []], reducertwo: [prefs, itemsDispatch] });
 
 function App() {
-  const [items, itemsDispatch] = useReducer(itemsReducer, []);
+  
   const [focusMode, setFocusMode] = useState(true);
   const [wallpaper, toggleWallpaper] = useState(true);
-  const [sort, setSort] = useState(sortOptions[2]);
-  const [selectedItem, setSelectedItem] = useState(null);
-
+  const [showSettings, setShowSettings] = useState(false);
   const [oldTasks, setOldTasks] = useState([]);
 
   useEffect(() => {
@@ -43,21 +37,25 @@ function App() {
     setFocusMode(focusMode => !focusMode);
   }
 
-  function selectItem(key) {
-    setSelectedItem(key);
-  }
-
   return (
     <ItemsContext.Provider value={{ items, itemsDispatch }}>
-      <div className="App">
-        <Header />
-
-        {wallpaper && <img className="background-img" src="https://source.unsplash.com/1600x900/?abstract" alt="imag" />}
-        {focusMode && <AddItemForm subtaskKey={''} />}
-        {selectedItem && <EditItem itemKey={selectedItem} cancel={() => selectItem(false)} />}
-        <ItemListView sort={sort} selectItem={selectItem} selectedItem={selectedItem} />
-        {oldTasks.length > 0 && <UpdateItemsPrompt tasks={oldTasks} />}
-        <Settings toggleAddForm={toggleAddForm} setSort={setSort} toggleForm={focusMode} toggleWallpaper={toggleWallpaper} sortOptions={sortOptions} />
+      <div className="App" style={{ background: wallpaper && 'hsl(0, 0%, 5%)' }}>
+        <div className="main-content">
+          <Header />
+          {focusMode && <AddItemForm subtaskKey={''} />}
+          <ItemListView />
+          {oldTasks.length > 0 && <UpdateItemsPrompt tasks={oldTasks} />}
+          <button onClick={() => { setShowSettings(showSettings => !showSettings) }}>Settings</button>
+        </div>
+        {showSettings && <Settings
+          toggleAddForm={toggleAddForm}
+          // setSort={setSort}
+          toggleForm={focusMode}
+          toggleWallpaper={toggleWallpaper}
+          // sortOptions={sortOptions}
+          close={() => setShowSettings(false)}
+        />}
+        <img className="background-img" src="https://source.unsplash.com/1600x900/?nature" alt="imag" />
       </div>
     </ItemsContext.Provider>
   );
