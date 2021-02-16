@@ -10,6 +10,7 @@
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-combine-reducers": "^1.1.1",
+    "react-context-devtool": "^2.0.3",
     "react-countdown-circle-timer": "^2.4.0",
     "react-date-picker": "^8.0.7",
     "react-dom": "^16.13.1",

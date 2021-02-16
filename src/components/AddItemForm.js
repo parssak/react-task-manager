@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from 'react';
-import ItemsContext from '../context/items-context';
+import ProfileContext from '../context/ProfileContext';
 import { v4 as uuidv4 } from 'uuid';
 import Select from "react-dropdown-select";
 import DatePicker from 'react-date-picker';
@@ -37,7 +37,7 @@ const AddItemForm = ({subtaskKey, addedSubtask, addingSubtask}) => {
   const [tag, setTag] = useState('');
   const [date, setDate] = useState(new Date());
   const thisElement = useRef();
-  const { itemsDispatch } = useContext(ItemsContext);
+  const { profileDispatch } = useContext(ProfileContext);
 
   const [commands, showCommands] = useState(false);
 
@@ -46,7 +46,7 @@ const AddItemForm = ({subtaskKey, addedSubtask, addingSubtask}) => {
     if (label === '') return;
     const item = createItem(label, duration, tag, date, subtaskKey);
     console.log("made >>>",item);
-    itemsDispatch({ type: 'ADD_ITEM', item });
+    profileDispatch({ type: 'ADD_ITEM', item });
     setLabel('');
     if (subtaskKey !== '') {
       addedSubtask(item.key);

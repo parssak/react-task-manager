@@ -1,4 +1,5 @@
 const itemsReducer = (state, action) => {
+  console.log('called items reducer', state);
   switch (action.type) {
     case 'POPULATE_ITEMS':
       return action.items;
@@ -6,6 +7,7 @@ const itemsReducer = (state, action) => {
       console.log('called add_item');
       return [...state, action.item];
     case 'REMOVE_ITEM':
+      console.log('state is rn', state);
       console.log('called remove_item');
       let removed = state.filter(item => item.key === action.itemToBeDeleted);
       let updatedArray = state;

@@ -9082,6 +9082,11 @@ react-combine-reducers@^1.1.1:
   dependencies:
     core-js "^3.6.5"
 
+react-context-devtool@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-context-devtool/-/react-context-devtool-2.0.3.tgz#60d6d8669bc64e32e42069638e961acc8320d77a"
+  integrity sha512-GVpDaQqRsVoofcbViVWelWTUHNjk4CAA81ZU+TVjEwZUTjhwOgKDM4t6yGfLBoEEG8PFYKbp9QqzyWw2BASe5Q==
+
 react-countdown-circle-timer@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/react-countdown-circle-timer/-/react-countdown-circle-timer-2.4.0.tgz#9d07dc63073265876ee54caf8f76baaf8b9946f6"

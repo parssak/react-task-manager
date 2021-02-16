@@ -18,17 +18,10 @@ const ItemListView = () => {
     let width = 1000;
     if (view.current) {
         width = view.current.clientWidth
-        console.log(width);
     }
 
     return (
-        <div
-            className={`item-list-view ${width < 500 && "v-wrapper"}`}
-            ref={view}
-            
-        >
-            
-            
+        <div className={`item-list-view ${width < 500 && "v-wrapper"}`} ref={view}>
             <ItemList sort={sort} select={selectItem} selectedItem={selectedItem} />
             {selectedItem &&
                 <div className={width < 500 && "v-wrapper"}>

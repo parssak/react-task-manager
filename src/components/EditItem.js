@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ItemsContext from '../context/items-context';
+import ProfileContext from '../context/ProfileContext';
 import { EditText } from 'react-edit-text';
 import DatePicker from 'react-date-picker';
 import Select from "react-dropdown-select";
@@ -8,7 +8,7 @@ import AddItemForm from './AddItemForm';
 import modifyItem from '../helper-functions/modifyItem';
 
 const EditItem = ({ itemKey, cancel }) => {
-    const { items, itemsDispatch } = useContext(ItemsContext);
+    const { profile, profileDispatch } = useContext(ProfileContext);
     const [tag, setTag] = useState('');
     const [label, setLabel] = useState("");
     const [duration, setDuration] = useState(0);
@@ -18,7 +18,7 @@ const EditItem = ({ itemKey, cancel }) => {
 
     useEffect(() => {
         // set up
-        const selectedItem = items.filter(item => item.key === itemKey)[0];
+        const selectedItem = profile.items.filter(item => item.key === itemKey)[0];
         if (selectedItem === undefined) {
             cancel()
             return
@@ -51,7 +51,7 @@ const EditItem = ({ itemKey, cancel }) => {
 
     const updateItem = () => {
         const payload = modifyItem(label, duration, tag[0] || tag, date, children, parent, itemKey);
-        itemsDispatch({ type: 'EDIT_ITEM', payload })
+        profileDispatch({ type: 'EDIT_ITEM', payload })
     }
 
     return (

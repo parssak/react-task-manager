@@ -1,40 +1,69 @@
 import React, { useState, useEffect, useReducer } from 'react';
+// State management
 import ItemsContext from '../context/items-context';
+import ProfileContext from '../context/ProfileContext';
 import itemsReducer from '../reducers/items';
+import prefsReducer from '../reducers/prefs';
+import combineReducers from 'react-combine-reducers';
+// Components
 import AddItemForm from './AddItemForm';
-import './styles/App.scss';
 import Header from './Header';
 import Settings from './Settings';
 import ItemListView from './ItemListView';
 import UpdateItemsPrompt from './UpdateItemsPrompt';
 import getTodayInYear from '../helper-functions/getTodayInYear';
-import combineReducers from 'react-combine-reducers';
+import './styles/App.scss';
+
+let initialItems = [];
+const items = JSON.parse(localStorage.getItem('items'));
+if (items) {
+  initialItems = items;
+}
+
+const initialPrefs = {
+  general: {
+    default_duration: 30,
+    tags: [
+      { value: 'Personal Projects', label: 'Personal Projects', color: '#bd3a61' },
+    ]
+  },
+  appearence: {
+    theme: 'dark',
+    style: 'regular',
+    wallpaper: false
+  },
+}
+
+const [profileReducer, initialProfile] = combineReducers({
+  items: [itemsReducer, initialItems],
+  prefs: [prefsReducer, initialPrefs]
+});
+
 
 function App() {
-  const [items, itemsDispatch] = useReducer(itemsReducer, []);
+  // const [items, itemsDispatch] = useReducer(itemsReducer, []);
+  const [profile, profileDispatch] = useReducer(profileReducer, initialProfile);
   const [focusMode, setFocusMode] = useState(true);
   const [wallpaper, toggleWallpaper] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
   const [oldTasks, setOldTasks] = useState([]);
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('items'));
-    if (items) {
-      itemsDispatch({ type: 'POPULATE_ITEMS', items });
-    }
+
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('items', JSON.stringify(items));
+    localStorage.setItem('items', JSON.stringify(profile.items));
     setOldTasks(items.filter(item => item.data.date.dayInYear < getTodayInYear()));
-  }, [items]);
+  }, [profile.items]);
 
   function toggleAddForm() {
     setFocusMode(focusMode => !focusMode);
   }
 
+  console.log("app > ",profile);
   return (
-    <ItemsContext.Provider value={{ items, itemsDispatch }}>
+    <ProfileContext.Provider value={{ profile, profileDispatch}}>
       <div className="App" style={{ background: wallpaper && 'hsl(0, 0%, 5%)' }}>
         <div className="main-content">
           <Header />
@@ -53,7 +82,7 @@ function App() {
         />}
         <img className="background-img" src="https://source.unsplash.com/1600x900/?nature" alt="imag" />
       </div>
-    </ItemsContext.Provider>
+     </ProfileContext.Provider>
   );
 }
 

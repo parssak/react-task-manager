@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import ItemsContext from '../context/items-context';
+import ProfileContext from '../context/ProfileContext';
 import calculateHeight from '../helper-functions/calculateHeight'
 import formatTime from '../helper-functions/formatTime'
 import daysIntoYear from '../helper-functions/daysIntoYear';
@@ -7,7 +7,7 @@ import EditItem from './EditItem';
 import modifyItem from '../helper-functions/modifyItem';
 
 const Item = ({ item, min, max, updated, selectItem, selectedItem, className, colorful }) => {
-  const { items, itemsDispatch } = useContext(ItemsContext);
+  const { profile, profileDispatch } = useContext(ProfileContext);
   const today = daysIntoYear(new Date());
   const [hovering, setHovering] = useState(false);
   const [addSubtask, setAddSubtask] = useState(false);
@@ -26,9 +26,9 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className, co
   function removeItem(key) {
     // updated();
     if (item.data.children.length > 0) {
-      item.data.children.forEach(childKey => itemsDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: key }));
+      item.data.children.forEach(childKey => profileDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: key }));
     }
-    itemsDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: key });
+    profileDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: key });
   }
 
   const drop = e => {
@@ -43,7 +43,7 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className, co
         child: card_id
       }
       // const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, [...item.data.children, card_id], item.data.parent, item.key);
-      itemsDispatch({ type: 'ADD_CHILD', payload })
+      profileDispatch({ type: 'ADD_CHILD', payload })
     }
   }
 
@@ -91,7 +91,7 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className, co
           </div>
         </div>
         <div className="children">
-          {items.filter(a => a.data.parent === item.key).map((b) => (
+          {profile.items.filter(a => a.data.parent === item.key).map((b) => (
             <Item itemKey={b.key} item={b} min={min} max={max} updated={updated} selectedItem={selectedItem} selectItem={selectItem} key={b.key} className="child" colorful/>
           ))}
         </div>
