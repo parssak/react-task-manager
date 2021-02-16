@@ -37,7 +37,8 @@ const ItemList = ({ sort, select, selectedItem }) => {
       profile.items.sort((a, b) => {
         if (!a.data.tag) return -1;
         if (!b.data.tag) return -1;
-        return a.data.tag.label.localeCompare(b.data.tag.label, 'en')
+        console.log(a.data.tag);
+        return a.data.tag.localeCompare(b.data.tag, 'en')
       })
       break;
     default:
@@ -46,8 +47,8 @@ const ItemList = ({ sort, select, selectedItem }) => {
 
   return (
     <div className="items-container glassy">
-      <button onClick={() => console.log(profile.items)}>Print items</button>
-      <button onClick={() => profileDispatch({ type: 'CLEAR_ALL', payload: null })}>Clear items</button>
+      {/* <button onClick={() => console.log(profile.items)}>Print items</button> */}
+      {/* <button onClick={() => profileDispatch({ type: 'CLEAR_ALL', payload: null })}>Clear items</button> */}
       {
         (sort === "TODAY") ?
           profile.items.filter((item) => item.data.parent === '').filter((item) => item.data.date.dayInYear - today === 0)

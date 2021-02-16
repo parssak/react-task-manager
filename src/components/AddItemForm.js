@@ -4,15 +4,23 @@ import { v4 as uuidv4 } from 'uuid';
 import Select from "react-dropdown-select";
 import DatePicker from 'react-date-picker';
 import getDateValues from '../helper-functions/getDateValues';
-// import { options } from '../helper-functions/options';
 const createItem = (label, duration, tag, date, parent) => {
   const [day, month, year, dayOfWeek, formattedDate, dateString, dayInYear] = getDateValues(date);
+  console.log(tag ,"< tag")
+  let actualTag = tag;
+  if (actualTag.length === 0) {
+    console.log('no tags')
+  } else {
+    console.log(tag);
+    actualTag = tag[0].value;
+  }
+  
   const item = {
     label: label,
     duration: duration,
     data:
     {
-      tag: tag[0] || { label:"NULL"},
+      tag: actualTag || 'NULL',
       date: {
         day,
         month,

@@ -50,13 +50,6 @@
         margin: 0 0;
     }
 
-    .tag {
-        padding: 0.4em;
-        border-radius: 0.4em;
-        font-weight: 600;
-        letter-spacing: -0.04rem;
-    }
-
     .duration {
         color: $lightText;
         font-size: 0.7rem;
@@ -83,6 +76,13 @@
         font-weight: 600;
         text-transform: capitalize;
     }
+}
+
+.tag {
+    padding: 0.4em;
+    border-radius: 0.4em;
+    font-weight: 600;
+    letter-spacing: -0.04rem;
 }
 
 .edit-item {

@@ -92,11 +92,8 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className, co
           ))}
         </div>
         <div className="center-align tag">
-          {hovering && item.data.parent === '' && <button className="add-subtask" onClick={e => setAddSubtask(true)}>Add subtask</button>}
-          {item.data.tag.label !== "NULL" && <span className="tag"
-            // style={{ backgroundColor: item.data.tag.color }}
-          >
-            {item.data.tag.label}</span>}
+          {console.log(item.data.tag)}
+          {item.data.tag !== "NULL" && <span className="tag">{item.data.tag}</span>}
         </div>
       </div>
     </div>

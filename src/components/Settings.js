@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import ProfileContext from '../context/ProfileContext';
+import { CirclePicker } from 'react-color';
 const appearence = 'Appereance';
 const account = 'Account';
 const general = 'General';
@@ -11,12 +12,13 @@ const packageGeneral = (duration, tags) => {
     }
 }
 
-const packageAppearence = (theme, style, wallpaper) => {
-    return {
-        theme,
-        style,
-        wallpaper
-    }
+
+const Tag = ({ label, color, changeColor }) => {
+    const [showColorOptions, setShowColorOptions] = useState(true);
+    return <div className="settings-tag tag" style={{ background: color }} onClick={() => setShowColorOptions(showColorOptions => !showColorOptions)}>
+        <div className="label">{label}</div>
+        {showColorOptions && <CirclePicker onChange={(color, event) => { changeColor(color.hex, label) }} />}
+    </div>
 }
 
 const GeneralSettings = () => {
@@ -25,10 +27,19 @@ const GeneralSettings = () => {
     const [tags, setTags] = useState(profile.prefs.general.tags);
 
     useEffect(() => {
-        console.log('changed!')
         profileDispatch({ type: 'CHANGE_GENERAL', payload: packageGeneral(defaultDuration, tags) });
     }, [defaultDuration, profileDispatch, tags]);
 
+    const changeColor = (color, label) => {
+        console.log(label, color)
+        const copy = tags;
+        const refreshed = copy.filter(t => t.label !== label);
+        const changeTag = copy.filter(t => t.label === label)[0];
+        changeTag.color = color;
+        refreshed.push(changeTag);
+        console.log(refreshed)
+        setTags(refreshed);
+    }
     return <>
         <div className="option">
             <label>Default duration</label>
@@ -36,8 +47,16 @@ const GeneralSettings = () => {
                 value={defaultDuration || 69}
                 onChange={e => setDefaultDuration(parseInt(e.target.value))} />
         </div>
+        <label><strong>Labels</strong></label>
+        <div className="labels">
+            {
+                tags.map(tag => {
+                    return <Tag label={tag.label} color={tag.color} key={tag.value} changeColor={changeColor} />
+                })
+            }
+            <div className="settings-tag add-label tag">Add new label...</div>
+        </div>
         <div className="option">
-
         </div>
     </>
 }
@@ -84,7 +103,7 @@ const Settings = ({ toggleAddForm, toggleForm, close }) => {
                         <div className="content">
                             <h3>{selectedSection}</h3>
                             <div className="v-wrapper">
-                                {selectedSection === appearence && <AppearenceSettings/>}
+                                {selectedSection === appearence && <AppearenceSettings />}
                                 {selectedSection === account && <UserSettings />}
                                 {selectedSection === general && <GeneralSettings />}
                             </div>

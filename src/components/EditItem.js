@@ -3,13 +3,12 @@ import ProfileContext from '../context/ProfileContext';
 import { EditText } from 'react-edit-text';
 import DatePicker from 'react-date-picker';
 import Select from "react-dropdown-select";
-import { options } from '../helper-functions/options';
 import AddItemForm from './AddItemForm';
 import modifyItem from '../helper-functions/modifyItem';
 
 const EditItem = ({ itemKey, cancel }) => {
     const { profile, profileDispatch } = useContext(ProfileContext);
-    const [tag, setTag] = useState('');
+    const [tag, setTag] = useState('NULL');
     const [label, setLabel] = useState("");
     const [duration, setDuration] = useState(0);
     const [date, setDate] = useState(new Date());
@@ -50,7 +49,7 @@ const EditItem = ({ itemKey, cancel }) => {
     }, [date, tag, children])
 
     const updateItem = () => {
-        const payload = modifyItem(label, duration, tag[0] || tag, date, children, parent, itemKey);
+        const payload = modifyItem(label, duration, tag, date, children, parent, itemKey);
         profileDispatch({ type: 'EDIT_ITEM', payload })
     }
 
@@ -63,7 +62,7 @@ const EditItem = ({ itemKey, cancel }) => {
                 </div>
                 <div className="edit-item-top">
                     <EditText type='number' className="item-duration" inline value={duration.toString()} onChange={e => setDuration(e)} onSave={updateItem} />
-                    <Select options={options} onChange={(value) => setTag(value)} wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag.label} />
+                    <Select options={profile.prefs.general.tags} onChange={(value) => setTag(value[0].value)} wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag} />
                     <DatePicker onChange={changeDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName="date-picker-calendar" className="date-picker" />
                 </div>
             </div>
