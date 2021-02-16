@@ -10,12 +10,8 @@ import UpdateItemsPrompt from './UpdateItemsPrompt';
 import getTodayInYear from '../helper-functions/getTodayInYear';
 import combineReducers from 'react-combine-reducers';
 
-// const [items, itemsDispatch] = useReducer(itemsReducer, []);
-const [rootReducerCombined, initialStateCombined] =
-  combineReducers({ items: [itemsReducer, []], reducertwo: [prefs, itemsDispatch] });
-
 function App() {
-  
+  const [items, itemsDispatch] = useReducer(itemsReducer, []);
   const [focusMode, setFocusMode] = useState(true);
   const [wallpaper, toggleWallpaper] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
