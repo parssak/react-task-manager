@@ -19,7 +19,7 @@ const ItemList = ({ sort, select, selectedItem }) => {
   const { profile, profileDispatch } = useContext(ProfileContext);
   const [, setToggle] = useState(true);
   const today = daysIntoYear(new Date());
-  let [min, max] = recalculateSizes([profile.items]);
+  let [min, max] = recalculateSizes(profile.items);
   recalculateSizes(profile.items);
   
   const updated = () => {

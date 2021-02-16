@@ -25,8 +25,6 @@ body {
 input {
   outline: none;
   border-radius: 0.3em;
-  background: $inputBg;
-  color: $lightText;
   border: 1px solid transparent;
   font-size: 1rem;
   padding: 0.5rem;
@@ -49,7 +47,7 @@ button {
   padding: 0.4rem;
   margin-top: 0.1rem;
   border-radius: 0.3rem;
-  color: $lightText;
+  // color: $lightText  !important;
   transition: all 0.2s;
 
   &:hover {
@@ -71,18 +69,24 @@ button {
   .main-content {
     margin-left: 3rem;
     margin-right: 3rem;
-    color: $regText;
+    // color: $regText;
   }
 }
 
 .settings {
   position: absolute;
   z-index: 4;
-  color: $regText;
   backdrop-filter: blur(4px);
   max-width: 70%;
   max-height: 70%;
-  background: rgb(37, 38, 39);
+  &.dark {
+    background: rgb(37, 38, 39);
+  }
+
+  &.light {
+    background: rgb(214, 215, 216);
+  }
+
   box-shadow: 0 0 1rem black;
   border: 1px solid hsl(210, 3%, 20%);
   top: 0;
@@ -99,6 +103,10 @@ button {
     margin-top: 0;
   }
   overflow: hidden;
+
+  &.light {
+    // background-color: blue;
+  }
 
   .settings-wrapper {
     display: flex;
@@ -155,7 +163,7 @@ button {
   // margin-top: 1rem;
   h1 {
     font-size: 1.7rem;
-    color: $regText;
+    // color: $regText;
   }
   display: flex;
   text-align: left;
@@ -187,7 +195,6 @@ button {
 */
 
 .glassy {
-  background: rgba(39, 39, 39, 0.8);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.18);
 
@@ -198,8 +205,9 @@ button {
   padding: 0.5rem;
   margin: 0;
 }
+
 .glassy-without {
-  background: rgba(39, 39, 39, 0.8);
+  background: $glassyBg;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.18);
 
@@ -233,6 +241,31 @@ button {
   align-items: center;
   justify-content: space-between;
 }
+.light {
+  color: $regTextLight;
+  * > * {
+    color: $regTextLight;
+    button {
+      background-color: hsl(234, 12%, 35%);
+      color: $lightText;
+    }
+    input {
+      background: $inputBgLight;
+    }
+  }
+}
 
+.dark {
+  color: $regText;
+  * > * {
+    color: $regText;
+  }
+  .glassy {
+    background: $glassyBg;
+  }
+  input {
+    background: $inputBg;
+  }
+}
 @import "Item.scss";
 @import "AddItem.scss";

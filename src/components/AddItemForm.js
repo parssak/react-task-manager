@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Select from "react-dropdown-select";
 import DatePicker from 'react-date-picker';
 import getDateValues from '../helper-functions/getDateValues';
-import { options } from '../helper-functions/options';
+// import { options } from '../helper-functions/options';
 const createItem = (label, duration, tag, date, parent) => {
   const [day, month, year, dayOfWeek, formattedDate, dateString, dayInYear] = getDateValues(date);
   const item = {
@@ -29,15 +29,15 @@ const createItem = (label, duration, tag, date, parent) => {
   }
   return item;
 }
-const defaultDur = 30;
 
 const AddItemForm = ({subtaskKey, addedSubtask, addingSubtask}) => {
+  const { profile, profileDispatch } = useContext(ProfileContext);
+
   const [label, setLabel] = useState('');
-  const [duration, setDuration] = useState(defaultDur);
+  const [duration, setDuration] = useState(profile.prefs.general.default_duration);
   const [tag, setTag] = useState('');
   const [date, setDate] = useState(new Date());
   const thisElement = useRef();
-  const { profileDispatch } = useContext(ProfileContext);
 
   const [commands, showCommands] = useState(false);
 
@@ -71,14 +71,13 @@ const AddItemForm = ({subtaskKey, addedSubtask, addingSubtask}) => {
           onKeyPress={e => e.key === "Enter" && handleSubmit(e)} className="glassy-inner" />  
       </div>
       <div className="group">
-        <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName="date-picker-calendar" className="date-picker" />
+        <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName={`date-picker-calendar ${profile.prefs.appearence.theme}`} className={`date-picker ${profile.prefs.appearence.theme}`} />
         <Select
-          options={options}
+          options={profile.prefs.general.tags}
           onChange={(value) => setTag(value)}
           create
           onCreateNew={(item) => console.log('%c New item created ', 'background: #555; color: tomato', item)}
-          wrapperClassName={"selector"} className={"selector glassy-inner"} />
-
+          wrapperClassName={`selector ${profile.prefs.appearence.theme}`} className={`selector glassy-inner ${profile.prefs.appearence.theme}`} />
       </div>
       </div>
       

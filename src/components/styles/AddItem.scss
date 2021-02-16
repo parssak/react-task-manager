@@ -10,7 +10,7 @@
     gap: 0.4rem;
     margin-bottom: 1rem;
     padding: none !important;
-    overflow:visible;
+    overflow: visible;
 }
 ::-webkit-scrollbar {
     display: hidden;
@@ -28,16 +28,35 @@
 .selector {
     border: none;
     outline: none;
-    background: $inputBg;
+    &.light {
+        background-color: $inputBgLight;
+        & > * {
+            background-color: $inputBgLight;
+        }
+        * > * {
+            background-color: $inputBgLight;
+            color: black;
+        }
+    }
+    &.dark {
+        background-color: $inputBg;
+        & > * {
+            background-color: $inputBg;
+            color: $lightText;
+        }
+        * > * {
+            background-color: $inputBg;
+            color: $lightText;
+        }
+    }
     border: $inputBg !important;
-    color: #fff;
     border-radius: 0.3rem !important;
     .react-dropdown-select-clear,
     .react-dropdown-select-dropdown-handle {
         color: $lightText;
     }
     .react-dropdown-select-option {
-        border: 1px solid #fff;
+        border: 1px solid $inputBgLight;
     }
     .react-dropdown-select-item {
         color: $inputBg;
@@ -98,7 +117,14 @@
         box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
         padding: 0.5rem;
         background-color: $inputBg;
-        // border: 0px transparent !important;
+    }
+    &.light {
+        * > * {
+            color: $inputBg;
+        }
+        & > * {
+            background-color: $inputBgLight;
+        }
     }
 }
 

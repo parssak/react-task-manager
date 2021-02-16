@@ -35,14 +35,10 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className, co
     e.preventDefault();
     const card_id = e.dataTransfer.getData('card_id');
     if (card_id !== item.key && card_id !== item.data.parent && !item.data.children.includes(card_id)) {
-      // console.log("dropped", card_id, "on me,", item.label);
-      // console.log([...item.data.children, card_id]);
-      console.log("CALLED DROP");
       const payload = {
         parent: item.key,
         child: card_id
       }
-      // const payload = modifyItem(item.label, item.duration, item.data.tag, item.data.date, [...item.data.children, card_id], item.data.parent, item.key);
       profileDispatch({ type: 'ADD_CHILD', payload })
     }
   }
@@ -52,13 +48,13 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className, co
     e.dataTransfer.setData('card_id', target.id);
     setTimeout(() => { }, 0)
   }
-  //backgroundColor: hovering && 'rgb(45,50,70)'
+  
   return (
     <div className={className}>
       <div className="item glassy-inner" id={item.key}
         style={{
           minHeight: calculateHeight(item.duration, min, max),
-          backgroundColor: colorful && item.data.tag.label !== "NULL" && item.data.tag.color
+          // backgroundColor: colorful && item.data.tag.label !== "NULL" && item.data.tag.color
         }}
         onClick={e => {
           if (!e) e = window.event;
@@ -97,7 +93,10 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className, co
         </div>
         <div className="center-align tag">
           {hovering && item.data.parent === '' && <button className="add-subtask" onClick={e => setAddSubtask(true)}>Add subtask</button>}
-          {item.data.tag.label !== "NULL" && <span className="tag" style={{ backgroundColor: item.data.tag.color }}>{item.data.tag.label}</span>}
+          {item.data.tag.label !== "NULL" && <span className="tag"
+            // style={{ backgroundColor: item.data.tag.color }}
+          >
+            {item.data.tag.label}</span>}
         </div>
       </div>
     </div>
