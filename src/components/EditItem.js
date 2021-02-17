@@ -62,8 +62,9 @@ const EditItem = ({ itemKey, cancel }) => {
                 </div>
                 <div className="edit-item-top">
                     <EditText type='number' className="item-duration" inline value={duration.toString()} onChange={e => setDuration(e)} onSave={updateItem} />
-                    <Select options={profile.prefs.general.tags} onChange={(value) => setTag(value[0].value)} wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag} />
                     <DatePicker onChange={changeDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName="date-picker-calendar" className="date-picker" />
+                    <Select options={profile.prefs.general.tags} onChange={(value) => setTag(value[0].value)} wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag} />
+                    
                 </div>
             </div>
             <AddItemForm subtaskKey={itemKey} addedSubtask={addedSubtask} addingSubtask />

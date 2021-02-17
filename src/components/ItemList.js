@@ -37,13 +37,13 @@ const ItemList = ({ sort, select, selectedItem }) => {
       profile.items.sort((a, b) => {
         if (!a.data.tag) return -1;
         if (!b.data.tag) return -1;
-        console.log(a.data.tag);
         return a.data.tag.localeCompare(b.data.tag, 'en')
       })
       break;
     default:
       break;
   }
+  profile.items.filter(e => e.label === "a").forEach(e => console.log(e));
 
   return (
     <div className="items-container glassy">

@@ -24,7 +24,7 @@ const ItemListView = () => {
         <div className={`item-list-view ${width < 500 && "v-wrapper"}`} ref={view}>
             <ItemList sort={sort} select={selectItem} selectedItem={selectedItem} />
             {selectedItem &&
-                <div className={width < 500 && "v-wrapper"}>
+                <div className={width < 500 ? "v-wrapper" : "nvm"}>
                     <EditItem itemKey={selectedItem} cancel={() => selectItem(false)} />
                     <div className="h-wrapper">
                         <button className="settings-button glassy-inner" onClick={() => setSort(sortOptions[0])}>Duration</button>

@@ -48,7 +48,7 @@ function App() {
   const [focusMode, setFocusMode] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
   const [oldTasks, setOldTasks] = useState([]);
-
+  const [refresh, setRefresh] = useState(false);
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(profile.items));
     setOldTasks(profile.items.filter(item => item.data.date.dayInYear < getTodayInYear()));
@@ -56,6 +56,10 @@ function App() {
 
   function toggleAddForm() {
     setFocusMode(focusMode => !focusMode);
+  }
+
+  function refreshMain() {
+    setRefresh(refresh => !refresh);
   }
 
   return (
@@ -74,6 +78,7 @@ function App() {
           toggleAddForm={toggleAddForm}
           toggleForm={focusMode}
           close={() => setShowSettings(false)}
+          refresh={refreshMain}
         />}
         <img className="background-img" src="https://source.unsplash.com/1600x900/?nature" alt="imag" />
       </div>

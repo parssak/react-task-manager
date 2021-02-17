@@ -3,8 +3,13 @@ import ProfileContext from '../context/ProfileContext';
 import calculateHeight from '../helper-functions/calculateHeight'
 import formatTime from '../helper-functions/formatTime'
 import daysIntoYear from '../helper-functions/daysIntoYear';
-import EditItem from './EditItem';
-import modifyItem from '../helper-functions/modifyItem';
+
+const findColor = (label, labels) => {
+  const element = labels.filter(e => e.label === label)[0];
+  if (element) return element.color;
+  else return 'rgba(0,0,0,0)'
+  
+}
 
 const Item = ({ item, min, max, updated, selectItem, selectedItem, className, colorful }) => {
   const { profile, profileDispatch } = useContext(ProfileContext);
@@ -48,17 +53,19 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className, co
     e.dataTransfer.setData('card_id', target.id);
     setTimeout(() => { }, 0)
   }
+  let color = '';
+  color = `${findColor(item.data.tag, profile.prefs.general.tags)}`;
   
   return (
-    <div className={className}>
+    <div className={'bob'}>
       <div className="item glassy-inner" id={item.key}
         style={{
-          minHeight: calculateHeight(item.duration, min, max),
-          // backgroundColor: colorful && item.data.tag.label !== "NULL" && item.data.tag.color
+          minHeight: calculateHeight(item.duration, min, max, profile.prefs.appearence.style === 'Compact'),
+          backgroundColor: profile.prefs.appearence.style === 'Vibrant' && color
         }}
         onClick={e => {
           if (!e) e = window.event;
-          e.cancelBubble = true; 
+          e.cancelBubble = true;
           if (e.stopPropagation) e.stopPropagation();
           selectItem(item.key === selectedItem ? null : item.key);
         }}
@@ -88,12 +95,11 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className, co
         </div>
         <div className="children">
           {profile.items.filter(a => a.data.parent === item.key).map((b) => (
-            <Item itemKey={b.key} item={b} min={min} max={max} updated={updated} selectedItem={selectedItem} selectItem={selectItem} key={b.key} className="child" colorful/>
+            <Item itemKey={b.key} item={b} min={min} max={max} updated={updated} selectedItem={selectedItem} selectItem={selectItem} key={b.key} className="child" colorful />
           ))}
         </div>
         <div className="center-align tag">
-          {console.log(item.data.tag)}
-          {item.data.tag !== "NULL" && <span className="tag">{item.data.tag}</span>}
+          {item.data.tag !== "NULL" && <span className="tag" style={{ backgroundColor: profile.prefs.appearence.style !== 'Monotone' && color}}>{item.data.tag}</span>}
         </div>
       </div>
     </div>
