@@ -1,6 +1,6 @@
-let GROWBASE = 7;      // rem
+let GROWBASE = 7;      
 const MAX = 20;
-const BASELINE = 0.5;  // rem
+const BASELINE = 0.5;  
 
 export default function calculateHeight(duration, minDuration, maxDuration, isCompact) {
     duration = parseInt(duration);
