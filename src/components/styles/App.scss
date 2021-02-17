@@ -156,6 +156,20 @@ button {
         font-size: 1.2rem;
       }
       margin-bottom: 0.5rem;
+      &.danger-zone {
+        background-color: hsla(0, 100%, 55%, 0.5);
+        padding: 0.4rem;
+        border-radius: 0.4rem;
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .sub-option {
+      label {
+        font-size: 1rem;
+      }
     }
     border-radius: 0.5rem;
   }
@@ -279,12 +293,14 @@ button {
 }
 .light {
   color: $regTextLight;
+  & > *,
   * > * {
     color: $regTextLight;
     input {
       background: $inputBgLight;
       color: hsl(234, 12%, 35%);
     }
+    
     .glassy,
     .glassy-without,
     .glassy-inner {
@@ -306,6 +322,7 @@ button {
     .item {
       background-color: $itemBg;
     }
+    
     button {
       background: $inputBg;
     }

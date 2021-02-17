@@ -8,7 +8,7 @@ const TAG = "TAG";
 const TODAY = "TODAY";
 
 const sortOptions = [DURATION, DATE, TAG, TODAY];
-const ItemListView = () => {
+const ItemListView = ({showCompleted}) => {
     const [sort, setSort] = useState(sortOptions[2]);
     const [selectedItem, setSelectedItem] = useState(null);
     const view = useRef()
@@ -22,7 +22,8 @@ const ItemListView = () => {
 
     return (
         <div className={`item-list-view ${width < 500 && "v-wrapper"}`} ref={view}>
-            <ItemList sort={sort} select={selectItem} selectedItem={selectedItem} />
+            <ItemList sort={sort} select={selectItem} selectedItem={selectedItem} completed={false} />
+            {showCompleted && <ItemList sort={sort} select={selectItem} selectedItem={selectedItem} completed={true} />}
             {selectedItem &&
                 <div className={width < 500 ? "v-wrapper" : "nvm"}>
                     <EditItem itemKey={selectedItem} cancel={() => selectItem(false)} />

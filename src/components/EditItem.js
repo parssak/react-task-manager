@@ -53,18 +53,25 @@ const EditItem = ({ itemKey, cancel }) => {
         profileDispatch({ type: 'EDIT_ITEM', payload })
     }
 
+    const deleteItem = () => {
+        profileDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: itemKey });
+    }
+
     return (
         <div className="edit-item" onDoubleClick={() => { cancel() }}>
             <div className="glassy-without">
                 <div className="edit-item-top">
                     <EditText className="item-name" inline value={label} onChange={e => setLabel(e)} onSave={updateItem} />
-                    <button onClick={() => { cancel() }}>Cancel</button>
+                    <div className="h-wrapper">
+                        <button onClick={() => { deleteItem() }}>Delete</button>
+                        <button onClick={() => { cancel() }}>Cancel</button>
+                    </div>
                 </div>
                 <div className="edit-item-top">
                     <EditText type='number' className="item-duration" inline value={duration.toString()} onChange={e => setDuration(e)} onSave={updateItem} />
                     <DatePicker onChange={changeDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName="date-picker-calendar" className="date-picker" />
                     <Select options={profile.prefs.general.tags} onChange={(value) => setTag(value[0].value)} wrapperClassName={"selector"} className={"selector glassy-inner"} placeholder={tag} />
-                    
+
                 </div>
             </div>
             <AddItemForm subtaskKey={itemKey} addedSubtask={addedSubtask} addingSubtask />

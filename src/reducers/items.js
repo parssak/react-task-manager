@@ -6,8 +6,14 @@ const itemsReducer = (state, action) => {
     case 'ADD_ITEM':
       console.log('called add_item');
       return [...state, action.item];
+    case 'COMPLETE_ITEM':
+      console.log('called compelte item')
+      let completedItem = state.filter(item => item.key === action.payload.completedItem)[0];
+      let completedItemVersion = state.filter(item => item.key !== action.payload.completedItem);
+      completedItem.completed = action.payload.completeStatus;
+      completedItemVersion.push(completedItem);
+      return completedItemVersion;
     case 'REMOVE_ITEM':
-      console.log('state is rn', state);
       console.log('called remove_item');
       let removed = state.filter(item => item.key === action.itemToBeDeleted);
       let updatedArray = state;
@@ -33,11 +39,14 @@ const itemsReducer = (state, action) => {
       updatedArray = updatedArray.filter((item) => item.key !== action.itemToBeDeleted);
       return updatedArray;
     case 'EDIT_ITEM':
-      console.log('called edit_item');
+      console.log('called edit_item');  
       return state.map(item => {
         if (item.key === action.payload.key) {
-          item = action.payload;
+          let newVersion = action.payload;
+          newVersion.completed = item.completed;
+          item = newVersion;
         }
+        console.log('returning item!', item)
         return item;
       })
     case 'ADD_CHILD':
@@ -60,6 +69,8 @@ const itemsReducer = (state, action) => {
     case 'CLEAR_ALL':
       console.log("Cleared all items!");
       return [];
+    case 'CLEAR_ALL_COMPLETED':
+      return state.filter(item => !item.completed);
     default:
       return state;
   }

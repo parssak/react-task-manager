@@ -33,7 +33,7 @@
     display: flex;
     gap: 0.5rem;
     border-radius: 0.25rem;
-    transition: all 0.2s;   
+    transition: all 0.2s;
 
     button {
         $buttonRadius: 15px;
@@ -63,14 +63,6 @@
         flex-direction: column;
     }
 
-    .center-align {
-        display: flex;
-        align-items: center;
-        &.tag {
-            margin-left: auto;
-        }
-    }
-
     .label {
         color: rgb(207, 207, 207);
         font-size: 1.5rem;
@@ -95,6 +87,13 @@
     }
 }
 
+.center-align {
+    display: flex;
+    align-items: center;
+    &.tag {
+        margin-left: auto;
+    }
+}
 .tag {
     padding: 0.4em;
     border-radius: 0.4em;
@@ -107,7 +106,7 @@
     flex-direction: column;
     gap: 1rem;
     .item-name {
-        font-size: 1.4rem;
+        font-size: 1.1rem;
         font-weight: 800;
         max-width: 10ch;
         text-align: left;

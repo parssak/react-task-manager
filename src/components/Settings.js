@@ -17,7 +17,7 @@ const Tag = ({ label, color, changeColor, removeTag }) => {
     const [showColorOptions, setShowColorOptions] = useState(false);
     return <div className="settings-tag tag" style={{ background: color }} onMouseOver={() => setShowColorOptions(true)} onMouseLeave={() => setShowColorOptions(false)}>
         <div className="label">{label}</div>
-        {showColorOptions && <CirclePicker width={'300px'}colors={colors} onChange={(color, event) => {
+        {showColorOptions && <CirclePicker width={'300px'} colors={colors} onChange={(color, event) => {
             console.log(color)
             changeColor(color.hsl, label)
         }} />}
@@ -33,13 +33,13 @@ const GeneralSettings = ({ refresh }) => {
     useEffect(() => {
         profileDispatch({ type: 'CHANGE_GENERAL', payload: packageGeneral(defaultDuration, tags) });
         refresh();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [defaultDuration, profileDispatch, tags]);
 
     const changeColor = (color, label) => {
         const refreshed = tags.filter(t => t.label !== label);
         const changeTag = tags.filter(t => t.label === label)[0];
-        changeTag.color = `hsl(${color.h},${color.s*100}%,${color.l*100}%)`;
+        changeTag.color = `hsl(${color.h},${color.s * 100}%,${color.l * 100}%)`;
         refreshed.push(changeTag);
         setTags(refreshed);
     }
@@ -79,15 +79,28 @@ const GeneralSettings = ({ refresh }) => {
                 })
             }
         </div>
-        <div className="option">
+        <div className="option"></div>
+        <div className="option danger-zone">
+            <div className="v-wrapper">
+                <label><strong>Danger zone</strong></label>
+                <p><strong>Warning:</strong> these actions cannot be undone</p>
+                <div className="sub-option">
+                    <label><strong>Delete all completed tasks</strong></label>
+                    <button onClick={() => profileDispatch({ type: 'CLEAR_ALL_COMPLETED' })}><strong>Delete all</strong></button>
+                </div>
+                <div className="sub-option">
+                    <label><strong>Delete all tasks</strong></label>
+                    <button onClick={() => profileDispatch({ type: 'CLEAR_ALL'})}><strong>Delete all</strong></button>
+                </div>
+            </div>
         </div>
     </>
 }
 const styleOptions = [
-    { value: 'Regular',  label: 'Regular'  },
-    { value: 'Vibrant',  label: 'Vibrant'  },
+    { value: 'Regular', label: 'Regular' },
+    { value: 'Vibrant', label: 'Vibrant' },
     { value: 'Monotone', label: 'Monotone' },
-    { value: 'Compact',  label: 'Compact'  }
+    { value: 'Compact', label: 'Compact' }
 ]
 
 const AppearenceSettings = ({ refresh }) => {
@@ -99,7 +112,7 @@ const AppearenceSettings = ({ refresh }) => {
     useEffect(() => {
         profileDispatch({ type: 'CHANGE_APPEARENCE', payload: { theme, style, wallpaper } });
         refresh();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [theme, style, wallpaper, profileDispatch]);
 
     return (<>
@@ -109,7 +122,7 @@ const AppearenceSettings = ({ refresh }) => {
         </div>
         <div className="option">
             <label>Toggle Wallpaper </label>
-            <button className="settings-button glassy-inner" onClick={() => setWallpaper(wallpaper => !wallpaper)}>{wallpaper ? 'Disabled': 'Active'}</button>
+            <button className="settings-button glassy-inner" onClick={() => setWallpaper(wallpaper => !wallpaper)}>{wallpaper ? 'Disabled' : 'Active'}</button>
         </div>
         <div className="option">
             <label>Tasks style </label>
@@ -123,11 +136,11 @@ const AppearenceSettings = ({ refresh }) => {
 
                 wrapperClassName={`selector ${profile.prefs.appearence.theme}`} className={`selector glassy-inner ${profile.prefs.appearence.theme}`} />
         </div>
-        
+
     </>)
 }
 
-const UserSettings = ({refresh}) => {
+const UserSettings = ({ refresh }) => {
     return <>Not implemented yet!</>
 }
 
@@ -152,9 +165,9 @@ const Settings = ({ toggleAddForm, toggleForm, close, refresh }) => {
                         <div className="content">
                             <h3>{selectedSection}</h3>
                             <div className="v-wrapper">
-                                {selectedSection === appearence && <AppearenceSettings refresh={ refresh }/>}
-                                {selectedSection === account && <UserSettings refresh={refresh}/>}
-                                {selectedSection === general && <GeneralSettings refresh={refresh}/>}
+                                {selectedSection === appearence && <AppearenceSettings refresh={refresh} />}
+                                {selectedSection === account && <UserSettings refresh={refresh} />}
+                                {selectedSection === general && <GeneralSettings refresh={refresh} />}
                             </div>
                         </div>
                     </div>

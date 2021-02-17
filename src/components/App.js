@@ -46,11 +46,13 @@ function App() {
   const [profile, profileDispatch] = useReducer(profileReducer, initialProfile);
   const [focusMode, setFocusMode] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(false);
   const [oldTasks, setOldTasks] = useState([]);
   const [refresh, setRefresh] = useState(false);
+
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(profile.items));
-    setOldTasks(profile.items.filter(item => item.data.date.dayInYear < getTodayInYear()));
+    setOldTasks(profile.items.filter(item => !item.completed).filter(item => item.data.date.dayInYear < getTodayInYear()));
   }, [profile.items]);
 
   function toggleAddForm() {
@@ -62,8 +64,6 @@ function App() {
     else setRefresh(refresh => !refresh);
   }
 
-  console.log(profile.prefs.appearence.theme);
-
   return (
     <ProfileContext.Provider value={{ profile, profileDispatch}}>
       <div className={`App ${profile.prefs.appearence.theme}`} style={{
@@ -72,8 +72,9 @@ function App() {
         <div className={`main-content ${profile.prefs.appearence.theme}`} >
           <Header />
           {focusMode && <AddItemForm subtaskKey={''} />}
-          <ItemListView />
+          <ItemListView showCompleted={ showCompleted}/>
           {oldTasks.length > 0 && <UpdateItemsPrompt tasks={oldTasks} />}
+          <button onClick={() => { setShowCompleted(showCompleted => !showCompleted) }}>Show Completed</button>
           <button onClick={() => { setShowSettings(showSettings => !showSettings) }}>Settings</button>
         </div>
         {showSettings && <Settings

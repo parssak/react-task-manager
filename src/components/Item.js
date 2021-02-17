@@ -3,11 +3,9 @@ import ProfileContext from '../context/ProfileContext';
 import calculateHeight from '../helper-functions/calculateHeight'
 import formatTime from '../helper-functions/formatTime'
 import daysIntoYear from '../helper-functions/daysIntoYear';
-import AnimateHeight from 'react-animate-height';
 
 const findColor = (label, labels, theme) => {
   const element = labels.filter(e => e.label === label)[0];
-  console.log(theme)
   if (element) return element.color;
   else return theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(50, 50, 50)';
 
@@ -31,11 +29,14 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className }) 
     formattedDate = "Yesterday"
 
   function removeItem(key) {
-    // updated();
     if (item.data.children.length > 0) {
       item.data.children.forEach(childKey => profileDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: key }));
     }
     profileDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: key });
+  }
+
+  function completeItem(key) {
+    profileDispatch({ type: 'COMPLETE_ITEM', payload: { completedItem: key, completeStatus: !item.completed } });
   }
 
   const drop = e => {
@@ -78,12 +79,11 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className }) 
         onDragStart={e => dragStart(e)}
         onDrop={e => drop(e)}
       >
-
         <div className="text-wrapper">
           <div className="h-wrapper">
             <div className="v-wrapper">
               <div className="center-align">
-                <button onClick={() => removeItem(item.key)} />
+                <button onClick={() => completeItem(item.key)} style={{backgroundColor: item.completed && 'green'}}/>
                 <span className={`label ${item.data.children.length > 0 && 'parent-label'}`}>{item.label}</span>
                 {collapse && <>{`${item.data.children.length} tasks`}</>}
               </div>
