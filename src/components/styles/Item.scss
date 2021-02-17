@@ -4,11 +4,23 @@
 	3. Item
     4. Edit Item
 */
+svg {
+    transition: all 0.1s ease;
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+    margin-right: 0.4rem;
+}
 
+.task-count {
+    margin-right: 0.7rem;
+
+}
 .item-list-view {
     display: flex;
     justify-content: flex-start;
-    min-width: $minWidth;
+    // min-width: $minWidth;
     @media screen and (max-width: 700px) {
         flex-direction: column;
     }
@@ -34,7 +46,6 @@
     gap: 0.5rem;
     border-radius: 0.25rem;
     transition: all 0.2s;
-
     button {
         $buttonRadius: 15px;
         height: $buttonRadius;

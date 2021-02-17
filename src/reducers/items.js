@@ -50,7 +50,7 @@ const itemsReducer = (state, action) => {
         return item;
       })
     case 'ADD_CHILD':
-      console.log('called add_child')
+      console.log('called add_child', action.payload)
       let parent = state.filter(item => item.key === action.payload.parent);
       let child = state.filter(item => item.key === action.payload.child);
       if (parent !== null && child !== null) {
@@ -58,13 +58,14 @@ const itemsReducer = (state, action) => {
         child = child[0];
         if (!parent.data.children.includes(child.key)) {
           parent.data.children.push(child.key);
-          child.data.parent = parent.key;
         }
+        child.data.parent = parent.key;
       }
       let newItems = state.filter(item => item.key !== action.payload.parent);
       newItems = newItems.filter(item => item.key !== action.payload.child);
       newItems.push(parent);
       newItems.push(child);
+      console.log(parent, child, newItems);
       return newItems;
     case 'CLEAR_ALL':
       console.log("Cleared all items!");

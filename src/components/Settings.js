@@ -5,7 +5,7 @@ import Select from "react-dropdown-select";
 const appearence = 'Appearence';
 const account = 'Account';
 const general = 'General';
-const colors = ['hsl(214, 98%, 19%)', 'hsl(181, 77%, 25%)', 'hsl(350, 72%, 48%)', 'hsl(266, 24%, 59%)', 'hsl(18, 83%, 63%)', 'hsl(12, 72%, 48%)', 'hsl(30, 98%, 19%)']
+const colors = ['hsl(214, 98%, 19%)', 'hsl(181, 77%, 35%)', 'hsl(350, 72%, 48%)', 'hsl(266, 24%, 59%)', 'hsl(18, 83%, 63%)', 'hsl(12, 72%, 48%)', 'hsl(80, 98%, 40%)']
 const packageGeneral = (duration, tags) => {
     return {
         default_duration: duration,
@@ -59,14 +59,12 @@ const GeneralSettings = ({ refresh }) => {
         setTags(removedVersion);
     }
     return <>
-        <div className="option">  </div>
         <div className="option">
             <label><strong>Default duration</strong></label>
             <input type="number" name="DefaultDuration" id="defaultduration"
                 value={defaultDuration || 69}
                 onChange={e => setDefaultDuration(parseInt(e.target.value))} />
         </div>
-        <div className="option">  </div>
         <div className="option">
             <label><strong>Labels</strong></label>
             <input type="text" className="settings-tag add-label tag" value={newTag} placeholder={'Add new label...'} onKeyDown={e => e.key === 'Enter' && createNewTag()} onChange={e => setNewTag(e.target.value)} />
@@ -90,7 +88,7 @@ const GeneralSettings = ({ refresh }) => {
                 </div>
                 <div className="sub-option">
                     <label><strong>Delete all tasks</strong></label>
-                    <button onClick={() => profileDispatch({ type: 'CLEAR_ALL'})}><strong>Delete all</strong></button>
+                    <button onClick={() => profileDispatch({ type: 'CLEAR_ALL' })}><strong>Delete all</strong></button>
                 </div>
             </div>
         </div>
@@ -116,27 +114,24 @@ const AppearenceSettings = ({ refresh }) => {
     }, [theme, style, wallpaper, profileDispatch]);
 
     return (<>
+
         <div className="option">
             <label>Toggle theme </label>
             <button className="settings-button glassy-inner" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>{theme}</button>
         </div>
+
         <div className="option">
             <label>Toggle Wallpaper </label>
             <button className="settings-button glassy-inner" onClick={() => setWallpaper(wallpaper => !wallpaper)}>{wallpaper ? 'Disabled' : 'Active'}</button>
         </div>
+
         <div className="option">
             <label>Tasks style </label>
             <Select
-                options={styleOptions}
-                onChange={(value) => {
-                    console.log(value);
-                    setStyle(value[0].value)
-                }}
-                placeholder={style}
-
-                wrapperClassName={`selector ${profile.prefs.appearence.theme}`} className={`selector glassy-inner ${profile.prefs.appearence.theme}`} />
+                searchable={false} options={styleOptions} onChange={value => setStyle(value[0].value)} placeholder={style}
+                wrapperClassName={`selector ${profile.prefs.appearence.theme}`}
+                className={`selector glassy-inner ${profile.prefs.appearence.theme}`} />
         </div>
-
     </>)
 }
 

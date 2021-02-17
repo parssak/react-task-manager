@@ -6,7 +6,9 @@ import daysIntoYear from '../helper-functions/daysIntoYear';
 function recalculateSizes(items) {
   let a = 9999;
   let b = -1;
-  items.forEach(e => {
+  items
+    .filter(item => !item.completed)
+    .forEach(e => {
     const d = parseInt(e.duration);
     if (d <= a) a = d;
     if (d >= b) b = d;
@@ -15,7 +17,7 @@ function recalculateSizes(items) {
 }
 
 const ItemList = ({ sort, select, selectedItem, completed }) => {
-  const { profile, } = useContext(ProfileContext);
+  const { profile, profileDispatch} = useContext(ProfileContext);
   const [, setToggle] = useState(true);
   const today = daysIntoYear(new Date());
   let [min, max] = recalculateSizes(profile.items);
@@ -44,9 +46,13 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
   }
 
   return (
-    <div className="items-container glassy">
-      {/* <button onClick={() => console.log(profile.items)}>Print items</button> */}
-      {/* <button onClick={() => profileDispatch({ type: 'CLEAR_ALL', payload: null })}>Clear items</button> */}
+    <div className="items-container glassy" onDragOver={ e => e.preventDefault()} onDrop={e => {
+      e.preventDefault();
+      console.log('dropped it on list', e);
+      const card_id = e.dataTransfer.getData('card_id');
+      console.log(card_id);
+      profileDispatch({ type: 'COMPLETE_ITEM', payload: { completedItem: card_id, completeStatus: completed } });
+    }}>
       { completed ? profile.items
         .filter((item) => item.data.parent === '')
         .filter(item => item.completed)
