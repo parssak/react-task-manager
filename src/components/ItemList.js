@@ -1,8 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import ProfileContext from '../context/ProfileContext';
 import Item from './Item';
 import daysIntoYear from '../helper-functions/daysIntoYear';
-import modifyItem from '../helper-functions/modifyItem';
 
 function recalculateSizes(items) {
   let a = 9999;
@@ -16,7 +15,7 @@ function recalculateSizes(items) {
 }
 
 const ItemList = ({ sort, select, selectedItem }) => {
-  const { profile, profileDispatch } = useContext(ProfileContext);
+  const { profile,} = useContext(ProfileContext);
   const [, setToggle] = useState(true);
   const today = daysIntoYear(new Date());
   let [min, max] = recalculateSizes(profile.items);

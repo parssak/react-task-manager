@@ -6,18 +6,15 @@ import DatePicker from 'react-date-picker';
 import getDateValues from '../helper-functions/getDateValues';
 const createItem = (label, duration, tag, date, parent) => {
   const [day, month, year, dayOfWeek, formattedDate, dateString, dayInYear] = getDateValues(date);
-  console.log(tag ,"< tag")
   let actualTag = tag;
-  if (actualTag.length === 0) {
-    console.log('no tags')
-  } else {
-    console.log(tag);
+  if (actualTag.length !== 0) {
     actualTag = tag[0].value;
   }
   
   const item = {
     label: label,
     duration: duration,
+    completed: false,
     data:
     {
       tag: actualTag || 'NULL',
@@ -76,7 +73,7 @@ const AddItemForm = ({subtaskKey, addedSubtask, addingSubtask}) => {
         <input type="text" value={label} onChange={e => setLabel(e.target.value)} autoFocus={true} style={{ flexGrow: !addingSubtask && 1, flexBasis: !addingSubtask && 'content'}}
           onKeyDown={e => handleKeyPress(e)} className="glassy-inner" placeholder={addingSubtask ? 'Add subtask...' : 'Add task'} />
         <input type="number" value={duration} onChange={e => setDuration(e.target.value)}
-          onKeyPress={e => e.key === "Enter" && handleSubmit(e)} className="glassy-inner" />  
+          onKeyPress={e => e.key === "Enter" && handleSubmit(e)} className="duration-selector glassy-inner" />  
       </div>
       <div className="group">
         <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName={`date-picker-calendar ${profile.prefs.appearence.theme}`} className={`date-picker ${profile.prefs.appearence.theme}`} />

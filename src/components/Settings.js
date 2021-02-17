@@ -5,7 +5,7 @@ import Select from "react-dropdown-select";
 const appearence = 'Appearence';
 const account = 'Account';
 const general = 'General';
-const colors = ['hsl(214, 98%, 19%)', 'hsl(181, 77%, 25%)', 'hsl(350, 72%, 48%)', 'hsl(266, 24%, 59%)', 'hsl(18, 83%, 63%)', 'hsl(150, 72%, 48%)', 'hsl(30, 98%, 19%)']
+const colors = ['hsl(214, 98%, 19%)', 'hsl(181, 77%, 25%)', 'hsl(350, 72%, 48%)', 'hsl(266, 24%, 59%)', 'hsl(18, 83%, 63%)', 'hsl(12, 72%, 48%)', 'hsl(30, 98%, 19%)']
 const packageGeneral = (duration, tags) => {
     return {
         default_duration: duration,

@@ -27,13 +27,13 @@
 }
 
 .item {
-    background-color: $itemBg;
+    // background-color: $itemBg;
     padding: 0.8rem;
     margin: 0.5rem 0;
     display: flex;
     gap: 0.5rem;
     border-radius: 0.25rem;
-    transition: all 0.2s;
+    transition: all 0.2s;   
 
     button {
         $buttonRadius: 15px;
@@ -41,6 +41,7 @@
         width: $buttonRadius;
         border-radius: 50%;
         border: none;
+        background-color: #0f0a0f;
         &:hover {
             cursor: pointer;
         }
@@ -75,6 +76,22 @@
         font-size: 1.5rem;
         font-weight: 600;
         text-transform: capitalize;
+    }
+
+    .collapse {
+        background-color: hsla(240, 16%, 7%, 0.3);
+        color: hsl(240, 16%, 60%);
+        display: flex;
+        align-self: flex-start;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        border-radius: 0.4rem;
+        font-size: 0.7rem;
+        transition: all ease 0.4s;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+        }
     }
 }
 

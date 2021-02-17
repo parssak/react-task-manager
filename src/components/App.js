@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
 // State management
-import ItemsContext from '../context/items-context';
 import ProfileContext from '../context/ProfileContext';
 import itemsReducer from '../reducers/items';
 import prefsReducer from '../reducers/prefs';
@@ -59,8 +58,11 @@ function App() {
   }
 
   function refreshMain() {
-    setRefresh(refresh => !refresh);
+    if (refresh) setRefresh(refresh => !refresh);
+    else setRefresh(refresh => !refresh);
   }
+
+  console.log(profile.prefs.appearence.theme);
 
   return (
     <ProfileContext.Provider value={{ profile, profileDispatch}}>
