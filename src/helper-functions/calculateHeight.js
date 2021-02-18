@@ -4,8 +4,8 @@ const BASELINE = 0.5;
 
 export default function calculateHeight(duration, minDuration, maxDuration, isCompact) {
     duration = parseInt(duration);
-    if (isCompact)
-        GROWBASE = 4; 
+    // if (isCompact)
+    //     GROWBASE = 4; 
     let normalized = maxDuration - minDuration;
     let height = GROWBASE;
     if ((normalized === 0) || (duration === minDuration)) {

@@ -60,7 +60,7 @@ const EditItem = ({ itemKey, cancel }) => {
     return (
         <div className="edit-item" onDoubleClick={() => { cancel() }}>
             <div className="glassy-without">
-                <div className="edit-item-top">
+                <div className="top-portion edit-item-top">
                     <EditText className="item-name" inline value={label} onChange={e => setLabel(e)} onSave={updateItem} />
                     <div className="h-wrapper">
                         <button onClick={() => { deleteItem() }}>Delete</button>
