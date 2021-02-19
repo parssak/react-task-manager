@@ -11,6 +11,11 @@
     margin-bottom: 1rem;
     padding: none !important;
     overflow: visible;
+    flex-wrap: wrap;
+    flex-basis: 100% !important;
+    input[type='text'] {
+        
+    }
 }
 ::-webkit-scrollbar {
     display: hidden;

@@ -38,9 +38,6 @@ input {
   &[type="number"] {
     width: 2rem;
   }
-  &[type="text"] {
-    flex-grow: 1;
-  }
 }
 
 button {
@@ -74,136 +71,7 @@ button {
   }
 }
 
-.settings {
-  position: absolute;
-  z-index: 4;
-  backdrop-filter: blur(4px);
-  max-width: 50%;
-  max-height: 70%;
 
-  &.dark {
-    background: rgb(37, 38, 39);
-  }
-
-  &.light {
-    background: rgb(214, 215, 216);
-  }
-
-  box-shadow: 0 0 1rem black;
-  border: 1px solid hsla(210, 3%, 20%, 0.1);
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  padding: 1rem;
-  border-radius: 1rem;
-  overflow: hidden;
-  h1,
-  h2,
-  h3,
-  p {
-    margin-top: 0;
-  }
-
-  .settings-tag {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-  .settings-wrapper {
-    display: flex;
-    position: relative;
-    height: 90%;
-    gap: 1rem;
-  }
-  .sidebar {
-    min-height: 100%;
-    display: flex;
-    height: max-content;
-    flex-direction: column;
-    button {
-      font-size: 1rem;
-      border: none;
-      padding: 1rem 1.8rem;
-      &:hover {
-        transform: scale(1);
-      }
-    }
-    .account {
-      margin-top: auto;
-    }
-  }
-
-  .content {
-    flex-grow: 1;
-    padding: 1rem;
-    overflow-y: scroll;
-    .v-wrapper {
-      gap: 0.4rem;
-    }
-    h3 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .option {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      label {
-        font-size: 1.2rem;
-      }
-      margin-bottom: 0.5rem;
-      &.danger-zone {
-        background-color: hsla(0, 100%, 50%, 0.4);
-        background-blend-mode: color-burn;
-        padding: 0.4rem;
-        border-radius: 0.4rem;
-        p {
-          margin-bottom: 0;
-        }
-      }
-    }
-
-    .sub-option {
-      label {
-        font-size: 1rem;
-      }
-    }
-    border-radius: 0.5rem;
-  }
-  label {
-    font-size: 1.3rem;
-  }
-
-  .labels {
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-    .settings-tag {
-      transition: all 0.1s ease;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      &:hover {
-        cursor: pointer;
-        transform: scale(1.005);
-      }
-    }
-    button {
-      &:hover {
-        transform: scale(1.01);
-      }
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-    .add-label {
-      background-color: hsla(0, 0%, 0%, 0.2);
-      color: grey;
-    }
-  }
-}
 .header {
   h1 {
     font-size: 1.4rem;
@@ -357,4 +225,5 @@ button {
   }
 }
 @import "Item.scss";
+@import "Settings.scss";
 @import "AddItem.scss";

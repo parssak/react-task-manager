@@ -88,7 +88,7 @@ const Item = ({ item, min, max, updated, selectItem, selectedItem, className }) 
       <div className="item glassy-inner" id={item.key}
         style={{
           minHeight: calculateHeight(item.duration, min, max, profile.prefs.appearence.style === 'Compact'),
-          backgroundColor: profile.prefs.appearence.style !== 'Monotone' && profile.prefs.appearence.style !== 'Regular' && color,
+          backgroundColor: profile.prefs.appearence.style === 'Vibrant' && color,
           padding: profile.prefs.appearence.style === 'Compact' && '0.3rem'
         }}
         onClick={e => {

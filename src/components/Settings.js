@@ -62,7 +62,7 @@ const GeneralSettings = ({ refresh }) => {
         <div className="option">
             <label><strong>Default duration</strong></label>
             <input type="number" name="DefaultDuration" id="defaultduration"
-                value={defaultDuration || 69}
+                value={defaultDuration}
                 onChange={e => setDefaultDuration(parseInt(e.target.value))} />
         </div>
         <div className="option">
