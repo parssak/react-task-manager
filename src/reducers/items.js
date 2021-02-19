@@ -83,7 +83,6 @@ const itemsReducer = (state, action) => {
         let newChildren = oldParent.data.children;
         newChildren = newChildren.filter(item => item !== action.payload.child);
         oldParent.data.children = newChildren;
-        console.log(action.payload.child, action.payload.parent, "new children = ", newChildren);
         newItems = newItems.filter(item => item.key !== action.payload.oldParent);
         newItems.push(oldParent);  
       }
