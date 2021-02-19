@@ -19,9 +19,9 @@ body {
   overflow: hidden !important;
   & > * {
     overflow: hidden !important;
-    font-family: 'Cadillac Sans A Book';
+    // font-family: 'Cadillac Sans A Book';
+    font-family: "Inter";
   }
-  
 }
 
 input {
@@ -70,7 +70,6 @@ button {
     // color: $regText;
   }
 }
-
 
 .header {
   h1 {
@@ -184,6 +183,10 @@ button {
     .item {
       background-color: $itemBgLight;
     }
+    .settings-tag,
+    .tag{
+      color: $regText !important;
+    }
   }
 }
 
@@ -194,7 +197,6 @@ button {
     .item {
       background-color: $itemBg;
     }
-
 
     .v-line {
       border: 1px solid rgba(48, 48, 48, 1);

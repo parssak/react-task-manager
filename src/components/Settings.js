@@ -18,7 +18,6 @@ const Tag = ({ label, color, changeColor, removeTag }) => {
     return <div className="settings-tag tag" style={{ background: color }} onMouseOver={() => setShowColorOptions(true)} onMouseLeave={() => setShowColorOptions(false)}>
         <div className="label">{label}</div>
         {showColorOptions && <CirclePicker width={'300px'} colors={colors} onChange={(color, event) => {
-            console.log(color)
             changeColor(color.hsl, label)
         }} />}
         <button onClick={() => removeTag(label)}>Remove tag</button>

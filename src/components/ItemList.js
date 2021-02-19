@@ -48,10 +48,20 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
   return (
     <div className="items-container glassy" onDragOver={ e => e.preventDefault()} onDrop={e => {
       e.preventDefault();
-      console.log('dropped it on list', e);
       const card_id = e.dataTransfer.getData('card_id');
       console.log(card_id);
-      profileDispatch({ type: 'COMPLETE_ITEM', payload: { completedItem: card_id, completeStatus: completed } });
+      const item = profile.items.filter(item => item.key === card_id)[0];
+      console.log('dropped', item, 'on list')
+      if (completed !== item.completed) {
+        profileDispatch({ type: 'COMPLETE_ITEM', payload: { completedItem: card_id, completeStatus: completed } });
+      } else {
+        const payload = {
+          parent: '',
+          child: card_id,
+          oldParent: item.data.parent
+        }
+        profileDispatch({ type: 'ADD_CHILD', payload })
+      }
     }}>
       { completed ? profile.items
         .filter((item) => item.data.parent === '')

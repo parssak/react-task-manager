@@ -50,21 +50,45 @@ const itemsReducer = (state, action) => {
         return item;
       })
     case 'ADD_CHILD':
-      console.log('called add_child', action.payload)
-      let parent = state.filter(item => item.key === action.payload.parent);
-      let child = state.filter(item => item.key === action.payload.child);
-      if (parent !== null && child !== null) {
-        parent = parent[0];
-        child = child[0];
+      console.log('called add_child')
+      let parent = state.filter(item => item.key === action.payload.parent)[0];
+      let child = state.filter(item => item.key === action.payload.child)[0];
+      if (parent === undefined && child !== undefined) {
+        child.data.parent = '';
+        if (action.payload.oldParent !== '') {
+          let new_parent = state.filter(item => item.key === action.payload.oldParent)[0];
+          let updated_children = new_parent.data.children;
+          updated_children = updated_children.filter(a => a !== action.payload.child);
+          new_parent.data.children = updated_children;
+          let updated_arr = state;
+          updated_arr = updated_arr.filter(e => e.key !== child.key);
+          updated_arr = updated_arr.filter(e => e.key !== new_parent.key);
+          updated_arr.push(child);
+          updated_arr.push(new_parent);
+          return updated_arr;
+        }
+      }
+      else if (parent !== undefined && child !== undefined) {
+        console.log(parent, child)
         if (!parent.data.children.includes(child.key)) {
           parent.data.children.push(child.key);
         }
         child.data.parent = parent.key;
-      }
+      } 
       let newItems = state.filter(item => item.key !== action.payload.parent);
       newItems = newItems.filter(item => item.key !== action.payload.child);
-      newItems.push(parent);
-      newItems.push(child);
+
+      if (action.payload.oldParent !== '' && action.payload.oldParent !== action.payload.parent) {
+        let oldParent = state.filter(item => item.key === action.payload.oldParent)[0];
+        let newChildren = oldParent.data.children;
+        newChildren = newChildren.filter(item => item !== action.payload.child);
+        oldParent.data.children = newChildren;
+        console.log(action.payload.child, action.payload.parent, "new children = ", newChildren);
+        newItems = newItems.filter(item => item.key !== action.payload.oldParent);
+        newItems.push(oldParent);  
+      }
+      parent && newItems.push(parent);
+      child &&  newItems.push(child);
       console.log(parent, child, newItems);
       return newItems;
     case 'CLEAR_ALL':

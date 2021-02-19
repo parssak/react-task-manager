@@ -35,6 +35,11 @@
     flex-direction: column;
     gap: 0.4rem;
   }
+
+  .tag {
+    & > * {color: $regText !important;}
+    width: 100%;
+  }
   .settings-wrapper {
     display: flex;
     position: relative;

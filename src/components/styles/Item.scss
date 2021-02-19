@@ -46,6 +46,7 @@ svg {
     gap: 0.5rem;
     border-radius: 0.25rem;
     transition: all 0.2s;
+    overflow: hidden;
     button {
         $buttonRadius: 15px;
         height: $buttonRadius;
@@ -84,8 +85,8 @@ svg {
     .collapse {
         background-color: hsla(240, 16%, 7%, 0.3);
         color: hsl(240, 16%, 60%);
-        display: flex;
-        align-self: flex-start;
+        // align-self: start;
+        width: fit-content;
         padding: 0.5rem;
         margin-top: 0.5rem;
         border-radius: 0.4rem;
@@ -97,6 +98,20 @@ svg {
         }
     }
 }
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "completed-area title-area"
+    ".              duration-area";
+}
+.completed-area { grid-area: completed-area; }
+.title-area { grid-area: title-area; }
+.duration-area { grid-area: duration-area; }
 
 .center-align {
     display: flex;
@@ -110,6 +125,7 @@ svg {
     border-radius: 0.4em;
     font-weight: 600;
     letter-spacing: -0.04rem;
+    width: fit-content;
 }
 
 .edit-item {
