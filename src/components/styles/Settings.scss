@@ -112,7 +112,7 @@
   .labels {
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
+    
     .settings-tag {
       transition: all 0.1s ease;
       display: flex;
@@ -124,10 +124,14 @@
       border-radius: 0.4em;
       font-weight: 600;
       letter-spacing: -0.04rem;
-
+      margin-bottom: 0.5rem;
+      
       &:hover {
         cursor: pointer;
         transform: scale(1.005);
+      }
+      & > * {
+        color: $regText !important;
       }
     }
     button {

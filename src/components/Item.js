@@ -12,7 +12,6 @@ const findColor = (label, labels, theme) => {
 
 const Duration = ({ item, theme }) => {
   const today = daysIntoYear(new Date());
-
   let formattedDate = item.data.date.formattedDate;
   let diff = item.data.date.dayInYear - today;
   if (diff === 0)

@@ -99,9 +99,9 @@ svg {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0fr 1fr;
-    gap: 0px 0px;
+    grid-template-columns: 0fr 1fr;
+    grid-template-rows: 0fr 0fr;
+    gap: -1px 0px;
     grid-template-areas:
         "completed-area title-area"
         ".              duration-area";
@@ -111,6 +111,7 @@ svg {
 }
 .title-area {
     grid-area: title-area;
+    height: min-content;
 }
 .duration-area {
     grid-area: duration-area;
