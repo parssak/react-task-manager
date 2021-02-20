@@ -15,7 +15,6 @@ svg {
 
 .task-count {
     margin-right: 0.7rem;
-
 }
 .item-list-view {
     display: flex;
@@ -99,19 +98,24 @@ svg {
     }
 }
 
-
 .grid-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 0fr 1fr;
-  gap: 0px 0px;
-  grid-template-areas:
-    "completed-area title-area"
-    ".              duration-area";
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "completed-area title-area"
+        ".              duration-area";
 }
-.completed-area { grid-area: completed-area; }
-.title-area { grid-area: title-area; }
-.duration-area { grid-area: duration-area; }
+.completed-area {
+    grid-area: completed-area;
+}
+.title-area {
+    grid-area: title-area;
+}
+.duration-area {
+    grid-area: duration-area;
+}
 
 .center-align {
     display: flex;
@@ -127,11 +131,10 @@ svg {
     letter-spacing: -0.04rem;
     width: fit-content;
 }
-
 .edit-item {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    margin: 0.5rem;
     .item-name {
         font-size: 1.1rem;
         font-weight: 800;
@@ -146,11 +149,12 @@ svg {
     .top-portion {
         margin-bottom: 1rem;
     }
-    .edit-item-top {
+    .edit-item-section {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
+
     .edit-item-bottom {
         display: flex;
         align-items: center;

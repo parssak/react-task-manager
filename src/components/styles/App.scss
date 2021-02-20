@@ -1,5 +1,6 @@
 @import "master.scss";
 @import "./CadillacSansA/stylesheet.css";
+@import "./Inter/inter.css";
 
 /* ~ Table of Contents ~
    1. Global Styles
@@ -214,6 +215,7 @@ button {
   }
   .glassy {
     background: $glassyBg;
+    margin: 0.5rem;
   }
   button {
     background: $inputBg;

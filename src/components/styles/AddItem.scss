@@ -7,16 +7,16 @@
 
 .add-item {
     display: flex;
-    gap: 0.4rem;
     margin-bottom: 1rem;
     padding: none !important;
     overflow: visible;
     flex-wrap: wrap;
     flex-basis: 100% !important;
-    input[type='text'] {
-        
-    }
 }
+.right-margin {
+    margin-right: 0.5rem;
+}
+
 ::-webkit-scrollbar {
     display: hidden;
     width: 0px;
@@ -27,7 +27,12 @@
 
 .group {
     display: flex;
-    gap: 0.4rem;
+    // gap: 0.4rem;
+    margin: 0.4rem;
+    * > * {
+    z-index: 99;
+
+    }
 }
 // TAB INPUT
 .selector {

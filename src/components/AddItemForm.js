@@ -71,12 +71,12 @@ const AddItemForm = ({subtaskKey, addedSubtask, addingSubtask}) => {
     <div className={`add-item ${subtaskKey ? 'glassy-without' : 'glassy'}`} ref={thisElement} style={{  flexDirection: subtaskKey && 'column' }}>
       <div className="group">
         <input type="text" value={label} onChange={e => setLabel(e.target.value)} autoFocus={true} style={{ flexGrow: !addingSubtask && 1, flexBasis: !addingSubtask && 'content'}}
-          onKeyDown={e => handleKeyPress(e)} className="glassy-inner" placeholder={addingSubtask ? 'Add subtask...' : 'Add task'} />
+          onKeyDown={e => handleKeyPress(e)} className="glassy-inner right-margin" placeholder={addingSubtask ? 'Add subtask...' : 'Add task'} />
         <input type="number" value={duration} onChange={e => setDuration(e.target.value)}
-          onKeyPress={e => e.key === "Enter" && handleSubmit(e)} className="duration-selector glassy-inner" />  
+          onKeyPress={e => e.key === "Enter" && handleSubmit(e)} className="duration-selector glassy-inner right-margin" />  
       </div>
       <div className="group">
-        <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName={`date-picker-calendar ${profile.prefs.appearence.theme}`} className={`date-picker ${profile.prefs.appearence.theme}`} />
+        {/* <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName={`date-picker-calendar ${profile.prefs.appearence.theme}`} className={`date-picker right-margin ${profile.prefs.appearence.theme}`} /> */}
         <Select
           options={profile.prefs.general.tags}
           onChange={(value) => setTag(value)}
