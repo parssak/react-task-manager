@@ -30,7 +30,6 @@ const EditItem = ({ itemKey, cancel }) => {
         setDate(date);
         setChildren(selectedItem.data.children);
         setParent(selectedItem.data.parent);
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [itemKey])
 
@@ -59,7 +58,7 @@ const EditItem = ({ itemKey, cancel }) => {
 
     return (
         <div className="edit-item" onDoubleClick={() => { cancel() }}>
-            <div className="glassy-without">
+            <div className="glassy-without bottom-margin">
                 <div className="top-portion edit-item-section">
                     <EditText className="item-name" inline value={label} onChange={e => setLabel(e)} onSave={updateItem} />
                     <div className="h-wrapper">

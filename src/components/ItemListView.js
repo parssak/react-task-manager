@@ -25,7 +25,7 @@ const ItemListView = ({showCompleted}) => {
             <ItemList sort={sort} select={selectItem} selectedItem={selectedItem} completed={false} />
             {showCompleted && <ItemList sort={sort} select={selectItem} selectedItem={selectedItem} completed={true} />}
             {selectedItem &&
-                <div className={width < 500 ? "v-wrapper" : "nvm"}>
+                <div className="edit-section view-section">
                     <EditItem itemKey={selectedItem} cancel={() => selectItem(false)} />
                     <div className="h-wrapper">
                         <button className="settings-button glassy-inner" onClick={() => setSort(sortOptions[0])}>Duration</button>

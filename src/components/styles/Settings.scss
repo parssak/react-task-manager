@@ -2,8 +2,8 @@
   position: absolute;
   z-index: 4;
   backdrop-filter: blur(4px);
-  max-width: 50%;
-  max-height: 70%;
+  max-width: 70%;
+  max-height: 80%;
 
   &.dark {
     background: rgb(37, 38, 39);
@@ -37,16 +37,20 @@
   }
 
   .tag {
-    & > * {color: $regText !important;}
+    & > * {
+      color: $regText !important;
+    }
     display: flex;
     flex-grow: 1;
   }
+
   .settings-wrapper {
     display: flex;
     position: relative;
     height: 90%;
     gap: 1rem;
   }
+
   .sidebar {
     min-height: 100%;
     display: flex;
@@ -69,23 +73,22 @@
     flex-grow: 1;
     padding: 1rem;
     overflow-y: scroll;
-    
+
     h3 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
     }
 
     .option {
       display: flex;
       align-items: center;
-      
+
       label {
-        font-size: 1.2rem;
+        font-size: 1rem;
         margin-right: 0.5rem;
       }
       margin-bottom: 0.5rem;
       &.danger-zone {
-        background-color: hsla(0, 100%, 50%, 0.4);
         background-blend-mode: color-burn;
         padding: 0.4rem;
         border-radius: 0.4rem;
@@ -114,9 +117,14 @@
       transition: all 0.1s ease;
       display: flex;
       flex-direction: row;
+      flex-grow: 1 !important;
       justify-content: space-between;
       align-items: center;
-      
+      padding: 0.4em;
+      border-radius: 0.4em;
+      font-weight: 600;
+      letter-spacing: -0.04rem;
+
       &:hover {
         cursor: pointer;
         transform: scale(1.005);

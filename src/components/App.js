@@ -74,8 +74,10 @@ function App() {
           {focusMode && <AddItemForm subtaskKey={''} />}
           <ItemListView showCompleted={ showCompleted}/>
           {oldTasks.length > 0 && <UpdateItemsPrompt tasks={oldTasks} />}
-          <button onClick={() => { setShowCompleted(showCompleted => !showCompleted) }}>Show Completed</button>
-          <button onClick={() => { setShowSettings(showSettings => !showSettings) }}>Settings</button>
+          <div className="option-row">
+            <button onClick={() => { setShowCompleted(showCompleted => !showCompleted) }}>Show Completed</button>
+            <button onClick={() => { setShowSettings(showSettings => !showSettings) }}>Settings</button>
+          </div>
         </div>
         {showSettings && <Settings
           toggleAddForm={toggleAddForm}

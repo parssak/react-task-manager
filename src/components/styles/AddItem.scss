@@ -7,32 +7,12 @@
 
 .add-item {
     display: flex;
-    margin-bottom: 1rem;
     padding: none !important;
-    overflow: visible;
-    flex-wrap: wrap;
-    flex-basis: 100% !important;
-}
-.right-margin {
-    margin-right: 0.5rem;
-}
-
-::-webkit-scrollbar {
-    display: hidden;
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
-    -ms-overflow-style: none; /* IE 11 */
-    scrollbar-width: none; /* Firefox 64 */
 }
 
 .group {
     display: flex;
-    // gap: 0.4rem;
     margin: 0.4rem;
-    * > * {
-    z-index: 99;
-
-    }
 }
 // TAB INPUT
 .selector {
@@ -79,7 +59,6 @@
         flex-direction: column;
         border-radius: 0.3rem;
         max-height: 300px;
-        // z-index: 999;
         background: $inputBg;
         box-shadow: none;
         margin-top: 0.4rem;
@@ -117,16 +96,12 @@
 
 // DATE PICKER
 .date-picker {
-    //  @media screen and (max-width: 700px) {
-    //     display: none;
-    // }
     outline: 0px !important;
     & > * {
         border: 1px solid rgba(100, 100, 100, 0.1);
         border-radius: 0.3rem;
         box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6);
         padding: 0.5rem;
-        
     }
     &.light {
         * > * {

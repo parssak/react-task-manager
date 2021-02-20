@@ -10,7 +10,7 @@ const createItem = (label, duration, tag, date, parent) => {
   if (actualTag.length !== 0) {
     actualTag = tag[0].value;
   }
-  
+
   const item = {
     label: label,
     duration: duration,
@@ -35,7 +35,7 @@ const createItem = (label, duration, tag, date, parent) => {
   return item;
 }
 
-const AddItemForm = ({subtaskKey, addedSubtask, addingSubtask}) => {
+const AddItemForm = ({ subtaskKey, addedSubtask, addingSubtask }) => {
   const { profile, profileDispatch } = useContext(ProfileContext);
 
   const [label, setLabel] = useState('');
@@ -50,42 +50,48 @@ const AddItemForm = ({subtaskKey, addedSubtask, addingSubtask}) => {
     e.preventDefault();
     if (label === '') return;
     const item = createItem(label, duration, tag, date, subtaskKey);
-    console.log("made >>>",item);
+    console.log("made >>>", item);
     profileDispatch({ type: 'ADD_ITEM', item });
     setLabel('');
     if (subtaskKey !== '') {
       addedSubtask(item.key);
     }
   };
-  
+
 
   const handleKeyPress = e => {
     switch (e.key) {
       case "Enter": handleSubmit(e); return;
       case "Escape": commands && showCommands(false); return;
-      case "/": !commands && showCommands(true); return;
+      case "/":
+        e.preventDefault();
+        !commands && showCommands(true);
+        return;
       default: return;
     }
   }
   return (
-    <div className={`add-item ${subtaskKey ? 'glassy-without' : 'glassy'}`} ref={thisElement} style={{  flexDirection: subtaskKey && 'column' }}>
+    <div className={`add-item ${subtaskKey ? 'glassy-without' : 'glassy'}`} ref={thisElement} style={{ flexDirection: subtaskKey && 'column' }}>
+      <input type="text" value={label} onChange={e => setLabel(e.target.value)} autoFocus={true} style={{ flexGrow: !addingSubtask && 1, flexBasis: !addingSubtask && 'content' }}
+        onKeyDown={e => handleKeyPress(e)} className="glassy-inner" placeholder={addingSubtask ? 'Add subtask...' : 'Add task'} />
+      { commands && 
       <div className="group">
-        <input type="text" value={label} onChange={e => setLabel(e.target.value)} autoFocus={true} style={{ flexGrow: !addingSubtask && 1, flexBasis: !addingSubtask && 'content'}}
-          onKeyDown={e => handleKeyPress(e)} className="glassy-inner right-margin" placeholder={addingSubtask ? 'Add subtask...' : 'Add task'} />
         <input type="number" value={duration} onChange={e => setDuration(e.target.value)}
-          onKeyPress={e => e.key === "Enter" && handleSubmit(e)} className="duration-selector glassy-inner right-margin" />  
-      </div>
-      <div className="group">
-        {/* <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName={`date-picker-calendar ${profile.prefs.appearence.theme}`} className={`date-picker right-margin ${profile.prefs.appearence.theme}`} /> */}
+          onKeyPress={e => e.key === "Enter" && handleSubmit(e)} className="duration-selector glassy-inner right-margin" />
+        <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName={`date-picker-calendar ${profile.prefs.appearence.theme}`} className={`date-picker right-margin ${profile.prefs.appearence.theme}`} />
         <Select
           options={profile.prefs.general.tags}
           onChange={(value) => setTag(value)}
           create
+          styles={{
+            // Fixes the overlapping problem of the component
+            menu: provided => ({ ...provided, zIndex: 9999 })
+          }}
           onCreateNew={(item) => console.log('%c New item created ', 'background: #555; color: tomato', item)}
           wrapperClassName={`selector ${profile.prefs.appearence.theme}`} className={`selector glassy-inner ${profile.prefs.appearence.theme}`} />
-      </div>
-      </div>
-      
+        </div>}
+    </div>
+
   );
 };
 

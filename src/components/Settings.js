@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import ProfileContext from '../context/ProfileContext';
 import { CirclePicker } from 'react-color';
 import Select from "react-dropdown-select";
@@ -6,16 +6,35 @@ const appearence = 'Appearence';
 const account = 'Account';
 const general = 'General';
 const colors = ['hsl(214, 98%, 19%)', 'hsl(181, 77%, 35%)', 'hsl(350, 72%, 48%)', 'hsl(266, 24%, 59%)', 'hsl(18, 83%, 63%)', 'hsl(12, 72%, 48%)', 'hsl(80, 98%, 40%)']
+
 const packageGeneral = (duration, tags) => {
     return {
         default_duration: duration,
         tags: tags
     }
 }
+/**
+ * @param {*} ref: Ref element from useRef 
+ * @param {Function} callback: Function to execute when clicked outside
+ */
+function useOutsideAlerter(ref, callback) {
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                if (typeof callback === 'function') callback();
+                else alert("Click outside detected, however callback was of type:", callback);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [ref, callback]);
+}
 
 const Tag = ({ label, color, changeColor, removeTag }) => {
     const [showColorOptions, setShowColorOptions] = useState(false);
-    return <div className="settings-tag tag" style={{ background: color }} onMouseOver={() => setShowColorOptions(true)} onMouseLeave={() => setShowColorOptions(false)}>
+    return <div className="settings-tag" style={{ background: color }} onMouseOver={() => setShowColorOptions(true)} onMouseLeave={() => setShowColorOptions(false)}>
         <div className="label">{label}</div>
         {showColorOptions && <CirclePicker width={'300px'} colors={colors} onChange={(color, event) => {
             changeColor(color.hsl, label)
@@ -79,8 +98,6 @@ const GeneralSettings = ({ refresh }) => {
         <div className="option"></div>
         <div className="option danger-zone">
             <div className="v-wrapper">
-                <label><strong>Danger zone</strong></label>
-                <p><strong>Warning:</strong> these actions cannot be undone</p>
                 <div className="sub-option">
                     <label><strong>Delete all completed tasks</strong></label>
                     <button onClick={() => profileDispatch({ type: 'CLEAR_ALL_COMPLETED' })}><strong>Delete all</strong></button>
@@ -93,6 +110,7 @@ const GeneralSettings = ({ refresh }) => {
         </div>
     </>
 }
+
 const styleOptions = [
     { value: 'Regular', label: 'Regular' },
     { value: 'Vibrant', label: 'Vibrant' },
@@ -113,7 +131,6 @@ const AppearenceSettings = ({ refresh }) => {
     }, [theme, style, wallpaper, profileDispatch]);
 
     return (<>
-
         <div className="option">
             <label>Toggle theme </label>
             <button className="settings-button glassy-inner" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>{theme}</button>
@@ -140,11 +157,15 @@ const UserSettings = ({ refresh }) => {
 
 const Settings = ({ toggleAddForm, toggleForm, close, refresh }) => {
     const [selectedSection, setSelectedSection] = useState(general);
+    const wrapperRef = useRef(null);
+    
+    useOutsideAlerter(wrapperRef, close);
+
     const { profile } = useContext(ProfileContext);
     return (
         <React.Fragment>
             {!toggleForm ? <button onClick={() => toggleAddForm()}>...</button> :
-                <div className={`settings ${profile.prefs.appearence.theme}`}>
+                <div className={`settings ${profile.prefs.appearence.theme}`} ref={wrapperRef}>
                     <div className="h-wrapper-spaced">
                         <h1>Settings</h1>
                         <button className="exit" onClick={() => close()}>Exit</button>

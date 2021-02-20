@@ -42,16 +42,15 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
       })
       break;
     default:
+      profile.items.sort((a, b) => a.key.localeCompare(b.key, 'en'))
       break;
   }
 
   return (
-    <div className="items-container glassy" onDragOver={ e => e.preventDefault()} onDrop={e => {
+    <div className="items-container glassy view-section" onDragOver={ e => e.preventDefault()} onDrop={e => {
       e.preventDefault();
       const card_id = e.dataTransfer.getData('card_id');
-      console.log(card_id);
       const item = profile.items.filter(item => item.key === card_id)[0];
-      console.log('dropped', item, 'on list')
       if (completed !== item.completed) {
         profileDispatch({ type: 'COMPLETE_ITEM', payload: { completedItem: card_id, completeStatus: completed } });
       } else {
