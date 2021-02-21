@@ -3,25 +3,11 @@ import ProfileContext from '../context/ProfileContext';
 import { v4 as uuidv4 } from 'uuid';
 import Select from "react-dropdown-select";
 import DatePicker from 'react-date-picker';
-// import getDateValues from '../helper-functions/getDateValues';
 const createItem = (label, duration, tag, date, parent) => {
-  // const [day, month, year, dayOfWeek, formattedDate, dateString, dayInYear] = getDateValues(date);
   let actualTag = tag;
   if (actualTag.length !== 0) {
     actualTag = tag[0].value;
   }
-
-  /**
-   *  date: {
-        day,
-        month,
-        year,
-        dayOfWeek,
-        formattedDate,
-        dateString,
-        dayInYear
-      },
-   */
   const item = {
     label: label,
     duration: duration,
@@ -30,6 +16,8 @@ const createItem = (label, duration, tag, date, parent) => {
     {
       tag: actualTag || 'NULL',
       date: date.toDateString(),
+      created_on: new Date().toDateString(),
+      completed_on: '',
       parent: parent,
       children: []
     },
@@ -52,11 +40,11 @@ const AddItemForm = ({ subtaskKey, addedSubtask, addingSubtask }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (label === '') return;
-    const item = createItem(label, duration, tag, date, subtaskKey);
+    const item = createItem(label, duration, tag, date, subtaskKey || '');
     console.log("made >>>", item);
     profileDispatch({ type: 'ADD_ITEM', item });
     setLabel('');
-    if (subtaskKey !== '') {
+    if (subtaskKey) {
       addedSubtask(item.key);
     }
   };

@@ -25,7 +25,7 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
   const updated = () => {
     setToggle(toggle => !toggle);
   }
-  console.log(sort, 'sort was')
+
   switch (sort) {
     case "DURATION":
       profile.items.sort((a, b) => (parseInt(a.duration) > parseInt(b.duration)) ? 1 : ((parseInt(b.duration) > parseInt(a.duration)) ? -1 : 0))
@@ -41,7 +41,6 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
       })
       break;
     default:
-      console.log('basic label sort');
       profile.items.sort((a, b) => a.label.localeCompare(b.label, 'en'))
       break;
   }

@@ -52,7 +52,7 @@ const GeneralSettings = ({ refresh }) => {
         profileDispatch({ type: 'CHANGE_GENERAL', payload: packageGeneral(defaultDuration, tags) });
         refresh();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [defaultDuration, profileDispatch, tags]);
+    }, [defaultDuration, tags]);
 
     const changeColor = (color, label) => {
         const refreshed = tags.filter(t => t.label !== label);
@@ -171,7 +171,7 @@ const Settings = ({ toggleSettings, showSettings, close, refresh }) => {
                         <button className="exit" onClick={() => close()}>Exit</button>
                     </div>
                     <div className="settings-wrapper">
-                        <div className="sidebar">
+                        <div className="settings-sidebar">
                             <button onClick={() => setSelectedSection(general)}>General</button>
                             <button onClick={() => setSelectedSection(appearence)}>Appearence</button>
                             <button className="account" onClick={() => setSelectedSection(account)}>Account</button>

@@ -17,9 +17,9 @@
 html,
 body {
   box-sizing: border-box;
-  overflow: hidden !important;
+  overflow: hidden;
   & > * {
-    overflow: hidden !important;
+    // overflow: hidden !important;
     // font-family: 'Cadillac Sans A Book';
     font-family: "Inter";
   }
@@ -65,16 +65,15 @@ button {
   min-height: 100vh;
   height: 100%;
   margin: 0;
-  .main-content {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
-}
+  overflow-y: auto !important;
+  // .main-content {
 
+  // }
+}
+//background-color: hsla(48, 80%, 51%, 0.5);
 .header {
   h1 {
     font-size: 1.4rem;
-
     text-shadow: 0 0 0.01rem black;
     mix-blend-mode: difference;
   }
@@ -91,7 +90,7 @@ button {
   min-height: 100vh;
   min-width: 100vw;
   filter: brightness(0.3) blur(1px);
-  overflow: hidden !important;
+  // overflow: hidden !important;
   max-width: 100vw;
 }
 
@@ -109,19 +108,19 @@ button {
   position: relative;
   pointer-events: all;
 }
+
 /*
 	----------------------
 	2.  Helper Classes
 	----------------------
 */
 
-
 ::-webkit-scrollbar {
-    display: hidden;
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
-    -ms-overflow-style: none; /* IE 11 */
-    scrollbar-width: none; /* Firefox 64 */
+  display: hidden;
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+  -ms-overflow-style: none; /* IE 11 */
+  scrollbar-width: none; /* Firefox 64 */
 }
 
 .glassy {
@@ -172,14 +171,13 @@ button {
   justify-content: space-between;
 }
 
-
 .right-margin {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .light {
   color: $regTextLight;
-  & > *,
+    & > *,
   * > * {
     color: $regTextLight;
     input {
@@ -203,7 +201,7 @@ button {
       background-color: $itemBgLight;
     }
     .settings-tag,
-    .tag{
+    .tag {
       color: $regText !important;
     }
   }
@@ -231,10 +229,13 @@ button {
       }
     }
   }
+  & .sidebar {
+    background-color: $bg2;
+  }
   .glassy {
     background: $glassyBg;
-    margin: 0.5rem;
   }
+
   button {
     background: $inputBg;
   }
@@ -250,6 +251,50 @@ button {
 .hide-overflow {
   overflow: hidden !important;
 }
+
+.sidebar {
+  position: fixed;
+  height: 100% !important;
+  width: 0;
+  z-index: 1;
+  overflow-x: hidden;
+  transition: 0.4s ease;
+  padding-top: 60px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-grow: 1;
+  top: 0;
+  bottom: 0;
+
+  &.left {
+    left: 0;
+  }
+  &.right {
+    right: 0;
+    transform-origin: right;
+  }
+  .sidebar-item {
+    font-size: 1rem;
+    background-color: none !important;
+    &:hover {
+      background-color: initial;
+    }
+  }
+}
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 2rem;
+}
+
+.fixed-bottom {
+  margin-top: auto;
+  // position: absolute;
+  // width: 95.5vw;
+  // bottom: 1;
+}
+
 @import "Item.scss";
 @import "Settings.scss";
 @import "AddItem.scss";

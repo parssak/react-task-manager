@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * {selectedItem &&
+                <div className="edit-section view-section">
+                    <EditItem itemKey={selectedItem} cancel={() => selectItem(false)} />
+                </div>
+            }
+ */
 const Header = () => {
     return (
         <div className="header">
