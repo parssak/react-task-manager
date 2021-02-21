@@ -155,7 +155,7 @@ const UserSettings = ({ refresh }) => {
     return <>Not implemented yet!</>
 }
 
-const Settings = ({ toggleAddForm, toggleForm, close, refresh }) => {
+const Settings = ({ toggleSettings, showSettings, close, refresh }) => {
     const [selectedSection, setSelectedSection] = useState(general);
     const wrapperRef = useRef(null);
     
@@ -164,7 +164,7 @@ const Settings = ({ toggleAddForm, toggleForm, close, refresh }) => {
     const { profile } = useContext(ProfileContext);
     return (
         <React.Fragment>
-            {!toggleForm ? <button onClick={() => toggleAddForm()}>...</button> :
+            {showSettings && 
                 <div className={`settings ${profile.prefs.appearence.theme}`} ref={wrapperRef}>
                     <div className="h-wrapper-spaced">
                         <h1>Settings</h1>

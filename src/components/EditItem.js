@@ -25,15 +25,15 @@ const EditItem = ({ itemKey, cancel }) => {
         console.log(selectedItem);
         setLabel(selectedItem.label);
         setDuration(selectedItem.duration);
-        let date = new Date(`${selectedItem.data.date.month.substring(0, 3)} ${selectedItem.data.date.day}, ${selectedItem.data.date.year}`)
         setTag(selectedItem.data.tag)
-        setDate(date);
+        setDate(new Date(selectedItem.data.date));
         setChildren(selectedItem.data.children);
         setParent(selectedItem.data.parent);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [itemKey])
 
     const changeDate = e => {
+        console.log("CHANGED DATE",e)
         setDate(e);
     }
 
@@ -48,7 +48,7 @@ const EditItem = ({ itemKey, cancel }) => {
     }, [date, tag, children])
 
     const updateItem = () => {
-        const payload = modifyItem(label, duration, tag, date, children, parent, itemKey);
+        const payload = modifyItem(label, duration, tag, date.toDateString(), children, parent, itemKey);
         profileDispatch({ type: 'EDIT_ITEM', payload })
     }
 

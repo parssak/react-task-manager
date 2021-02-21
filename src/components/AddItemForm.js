@@ -3,22 +3,16 @@ import ProfileContext from '../context/ProfileContext';
 import { v4 as uuidv4 } from 'uuid';
 import Select from "react-dropdown-select";
 import DatePicker from 'react-date-picker';
-import getDateValues from '../helper-functions/getDateValues';
+// import getDateValues from '../helper-functions/getDateValues';
 const createItem = (label, duration, tag, date, parent) => {
-  const [day, month, year, dayOfWeek, formattedDate, dateString, dayInYear] = getDateValues(date);
+  // const [day, month, year, dayOfWeek, formattedDate, dateString, dayInYear] = getDateValues(date);
   let actualTag = tag;
   if (actualTag.length !== 0) {
     actualTag = tag[0].value;
   }
 
-  const item = {
-    label: label,
-    duration: duration,
-    completed: false,
-    data:
-    {
-      tag: actualTag || 'NULL',
-      date: {
+  /**
+   *  date: {
         day,
         month,
         year,
@@ -27,6 +21,15 @@ const createItem = (label, duration, tag, date, parent) => {
         dateString,
         dayInYear
       },
+   */
+  const item = {
+    label: label,
+    duration: duration,
+    completed: false,
+    data:
+    {
+      tag: actualTag || 'NULL',
+      date: date.toDateString(),
       parent: parent,
       children: []
     },

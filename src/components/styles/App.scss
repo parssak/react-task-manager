@@ -246,6 +246,10 @@ button {
     background: $inputBg;
   }
 }
+
+.hide-overflow {
+  overflow: hidden !important;
+}
 @import "Item.scss";
 @import "Settings.scss";
 @import "AddItem.scss";

@@ -10,7 +10,7 @@ import Header from './Header';
 import Settings from './Settings';
 import ItemListView from './ItemListView';
 import UpdateItemsPrompt from './UpdateItemsPrompt';
-import getTodayInYear from '../helper-functions/getTodayInYear';
+import daysIntoYear from '../helper-functions/daysIntoYear';
 import './styles/App.scss';
 
 let initialItems = [];
@@ -52,11 +52,15 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(profile.items));
-    setOldTasks(profile.items.filter(item => !item.completed).filter(item => item.data.date.dayInYear < getTodayInYear()));
+    setOldTasks(profile.items.filter(item => !item.completed).filter(item => daysIntoYear(new Date(item.data.date)) < daysIntoYear(new Date())));
   }, [profile.items]);
 
   function toggleAddForm() {
     setFocusMode(focusMode => !focusMode);
+  }
+
+  function toggleSettings() {
+    setShowSettings(showSettings => !showSettings);
   }
 
   function refreshMain() {
@@ -71,20 +75,20 @@ function App() {
       }}>
         <div className={`main-content ${profile.prefs.appearence.theme}`} >
           <Header />
-          {focusMode && <AddItemForm subtaskKey={''} />}
-          <ItemListView showCompleted={ showCompleted}/>
-          {oldTasks.length > 0 && <UpdateItemsPrompt tasks={oldTasks} />}
+          <AddItemForm subtaskKey={''} />
+          <ItemListView showCompleted={showCompleted} />
+          <UpdateItemsPrompt tasks={oldTasks} />
           <div className="option-row">
             <button onClick={() => { setShowCompleted(showCompleted => !showCompleted) }}>Show Completed</button>
             <button onClick={() => { setShowSettings(showSettings => !showSettings) }}>Settings</button>
           </div>
         </div>
-        {showSettings && <Settings
-          toggleAddForm={toggleAddForm}
-          toggleForm={focusMode}
+        <Settings
+          showSettings = {showSettings}
+          toggleSettings={toggleSettings}
           close={() => setShowSettings(false)}
           refresh={refreshMain}
-        />}
+        />
         <img className="background-img" src="https://source.unsplash.com/1600x900/?nature" alt="imag" />
       </div>
      </ProfileContext.Provider>

@@ -1,15 +1,15 @@
 import React, { useState, useRef } from 'react';
 import ItemList from './ItemList';
 import EditItem from './EditItem';
-
+const LABEL = "LABEL";
 const DURATION = "DURATION";
 const DATE = "DATE";
 const TAG = "TAG";
 const TODAY = "TODAY";
 
-const sortOptions = [DURATION, DATE, TAG, TODAY];
+const sortOptions = [DURATION, DATE, TAG, TODAY, LABEL];
 const ItemListView = ({showCompleted}) => {
-    const [sort, setSort] = useState(sortOptions[2]);
+    const [sort, setSort] = useState(sortOptions[4]);
     const [selectedItem, setSelectedItem] = useState(null);
     const view = useRef()
     function selectItem(key) {

@@ -9,30 +9,29 @@ function recalculateSizes(items) {
   items
     .filter(item => !item.completed)
     .forEach(e => {
-    const d = parseInt(e.duration);
-    if (d <= a) a = d;
-    if (d >= b) b = d;
-  })
+      const d = parseInt(e.duration);
+      if (d <= a) a = d;
+      if (d >= b) b = d;
+    })
   return [a, b]
 }
 
 const ItemList = ({ sort, select, selectedItem, completed }) => {
-  const { profile, profileDispatch} = useContext(ProfileContext);
+  const { profile, profileDispatch } = useContext(ProfileContext);
   const [, setToggle] = useState(true);
-  const today = daysIntoYear(new Date());
   let [min, max] = recalculateSizes(profile.items);
   recalculateSizes(profile.items);
 
   const updated = () => {
     setToggle(toggle => !toggle);
   }
-
+  console.log(sort, 'sort was')
   switch (sort) {
     case "DURATION":
       profile.items.sort((a, b) => (parseInt(a.duration) > parseInt(b.duration)) ? 1 : ((parseInt(b.duration) > parseInt(a.duration)) ? -1 : 0))
       break;
     case "DATE":
-      profile.items.sort((a, b) => (parseInt(a.data.date.day) > parseInt(b.data.date.day)) ? 1 : ((parseInt(b.data.date.day) > parseInt(a.data.date.day)) ? -1 : 0))
+      // profile.items.sort((a, b) => daysIntoYear(new Date(a.data.date)) > daysIntoYear(new Date(b.data.date)) ? 1 : (daysIntoYear(new Date(b.data.date)) > daysIntoYear(new Date(a.data.date)) ? -1 : 0))
       break;
     case "TAG":
       profile.items.sort((a, b) => {
@@ -42,12 +41,13 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
       })
       break;
     default:
-      profile.items.sort((a, b) => a.key.localeCompare(b.key, 'en'))
+      console.log('basic label sort');
+      profile.items.sort((a, b) => a.label.localeCompare(b.label, 'en'))
       break;
   }
 
   return (
-    <div className="items-container glassy view-section" onDragOver={ e => e.preventDefault()} onDrop={e => {
+    <div className="items-container glassy view-section" onDragOver={e => e.preventDefault()} onDrop={e => {
       e.preventDefault();
       const card_id = e.dataTransfer.getData('card_id');
       const item = profile.items.filter(item => item.key === card_id)[0];
@@ -72,7 +72,7 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
           profile.items
             .filter((item) => item.data.parent === '')
             .filter(item => !item.completed)
-            .filter((item) => item.data.date.dayInYear - today === 0)
+            .filter((item) => daysIntoYear(new Date(item.data.date)) - daysIntoYear(new Date()) === 0)
             .map((item) => (
               <Item key={item.key} item={item} min={min} max={max} updated={updated} selectItem={select} selectedItem={selectedItem} />
             )) :
