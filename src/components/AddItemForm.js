@@ -69,7 +69,8 @@ const AddItemForm = ({ subtaskKey, addedSubtask, addingSubtask }) => {
       <div className="group">
         <input type="number" value={duration} onChange={e => setDuration(e.target.value)}
           onKeyPress={e => e.key === "Enter" && handleSubmit(e)} className="duration-selector glassy-inner right-margin" />
-        <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} calendarClassName={`date-picker-calendar ${profile.prefs.appearence.theme}`} className={`date-picker right-margin ${profile.prefs.appearence.theme}`} />
+        {/* <DatePicker onChange={setDate} value={date} calendarIcon={null} clearIcon={null} /> */}
+        {/* calendarClassName={`date-picker-calendar ${profile.prefs.appearence.theme}`} className={`date-picker right-margin ${profile.prefs.appearence.theme}`} */}
         <Select
           options={profile.prefs.general.tags}
           onChange={(value) => setTag(value)}

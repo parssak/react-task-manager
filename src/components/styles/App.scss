@@ -23,6 +23,12 @@ body {
     // font-family: 'Cadillac Sans A Book';
     font-family: "Inter";
   }
+
+  & > *,
+  * > *,
+  {
+    outline: none;
+  }
 }
 
 input {
@@ -109,6 +115,23 @@ button {
   pointer-events: all;
 }
 
+.focus-mode {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: grey;
+  width: 100%;
+  height: 100%;
+
+  .focus-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
 /*
 	----------------------
 	2.  Helper Classes
@@ -124,9 +147,8 @@ button {
 }
 
 .glassy {
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 8px 0.5rem 0 rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.18);
-
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
@@ -192,13 +214,13 @@ button {
     .glassy,
     .glassy-without,
     .glassy-inner {
-      background: rgb(216, 216, 216);
+      background: $itemBgLight;
       * > * {
         color: $regTextLight !important;
       }
     }
     .item {
-      background-color: $itemBgLight;
+      background-color: rgb(216, 216, 216);
     }
     .settings-tag,
     .tag {

@@ -13,6 +13,7 @@ import UpdateItemsPrompt from './UpdateItemsPrompt';
 import daysIntoYear from '../helper-functions/daysIntoYear';
 import './styles/App.scss';
 import Sidebar from './Sidebar';
+import FocusMode from './FocusMode';
 
 let initialItems = [];
 const items = JSON.parse(localStorage.getItem('items'));
@@ -52,7 +53,7 @@ const sortOptions = [DURATION, DATE, TAG, TODAY, LABEL];
 
 function App() {
   const [profile, profileDispatch] = useReducer(profileReducer, initialProfile);
-  // const [focusMode, setFocusMode] = useState(true);
+  const [focusMode, setFocusMode] = useState("d088dd87-4f6f-4be7-92a1-9b0148cc4089");
 
   const [showSettings, setShowSettings] = useState(false);
   const [showNav, setShowNav] = useState(false);
@@ -65,6 +66,10 @@ function App() {
   function selectItem(key) {
     console.log('selected', key);
     setSelectedItem(key);
+  }
+
+  function setFocus(item) {
+    setFocusMode(item);
   }
 
   useEffect(() => {
@@ -97,13 +102,13 @@ function App() {
         background: profile.prefs.appearence.wallpaper && (profile.prefs.appearence.theme === 'light' ? 'hsl(0, 0%, 80%)' : 'hsl(0, 0%, 5%)')
       }}>
         <Header />
-        <EditItem itemKey={selectedItem} cancel={() => setSelectedItem(null)} />
+        <EditItem itemKey={selectedItem} cancel={() => setSelectedItem(null)} focusMode={setFocus}/>
         <button onClick={() => { setShowCompleted(showCompleted => !showCompleted) }}>Show Completed</button>
         <button onClick={() => toggleNav()}>Toggle Nav</button>
-        <button className="settings-button glassy-inner" onClick={() => setSort(sortOptions[0])}>Duration</button>
-        <button className="settings-button glassy-inner" onClick={() => setSort(sortOptions[1])}>Date</button>
-        <button className="settings-button glassy-inner" onClick={() => setSort(sortOptions[2])}>Tag</button>
-        <button className="settings-button glassy-inner" onClick={() => setSort(sortOptions[3])}>Today</button>
+        <button onClick={() => setSort(sortOptions[0])}>Duration</button>
+        <button onClick={() => setSort(sortOptions[1])}>Date</button>
+        <button onClick={() => setSort(sortOptions[2])}>Tag</button>
+        <button onClick={() => setSort(sortOptions[3])}>Today</button>
         <div className={`main-content ${profile.prefs.appearence.theme}`} >
           <ItemListView sort={sort} showCompleted={showCompleted} selectItem={selectItem} selectedItem={selectedItem} />
           <UpdateItemsPrompt tasks={oldTasks} />
@@ -115,6 +120,7 @@ function App() {
           close={() => setShowSettings(false)}
           refresh={refreshMain}
         />
+        {focusMode && <FocusMode itemKey={focusMode}/>}
         {/* <img className="background-img" src="https://source.unsplash.com/1600x900/?nature" alt="imag" /> */}
       </div>
     </ProfileContext.Provider>

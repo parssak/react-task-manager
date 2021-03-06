@@ -34,9 +34,6 @@ svg {
 
     min-height: 2rem;
     transition: all 0.2s ease;
-    &:hover {
-        min-height: 4rem;
-    }
 }
 
 .item {
@@ -190,6 +187,8 @@ svg {
     max-height: 560px;
     overflow-y: auto;
     padding-top: 1rem;
+    padding: 0.5rem;
+
     margin-bottom: 0.5rem;
     overflow-y: hidden;
     border-radius: 0.5rem;

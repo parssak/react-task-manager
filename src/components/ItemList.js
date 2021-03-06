@@ -31,7 +31,7 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
       profile.items.sort((a, b) => (parseInt(a.duration) > parseInt(b.duration)) ? 1 : ((parseInt(b.duration) > parseInt(a.duration)) ? -1 : 0))
       break;
     case "DATE":
-      // profile.items.sort((a, b) => daysIntoYear(new Date(a.data.date)) > daysIntoYear(new Date(b.data.date)) ? 1 : (daysIntoYear(new Date(b.data.date)) > daysIntoYear(new Date(a.data.date)) ? -1 : 0))
+      profile.items.sort((a, b) => daysIntoYear(new Date(a.data.date)) > daysIntoYear(new Date(b.data.date)) ? 1 : (daysIntoYear(new Date(b.data.date)) > daysIntoYear(new Date(a.data.date)) ? -1 : 0))
       break;
     case "TAG":
       profile.items.sort((a, b) => {
@@ -46,15 +46,17 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
   }
 
   return (
-    <div className="items-container glassy view-section" onDragOver={e => e.preventDefault()} onDrop={e => {
-      e.preventDefault();
+    <div className="items-container glassy view-section"
+      onDragOver={e => {
+        e.preventDefault();
+      }}
+      onDrop={e => {e.preventDefault();
       const card_id = e.dataTransfer.getData('card_id');
       const item = profile.items.filter(item => item.key === card_id)[0];
       if (completed !== item.completed) {
         profileDispatch({ type: 'COMPLETE_ITEM', payload: { completedItem: card_id, completeStatus: completed } });
       } else {
         const payload = {
-          parent: '',
           child: card_id,
           oldParent: item.data.parent
         }
@@ -67,15 +69,7 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
         .map((item) => (
           <Item key={item.key} item={item} min={min} max={max} updated={updated} selectItem={select} selectedItem={selectedItem} />
         )) :
-        (sort === "TODAY") ?
-          profile.items
-            .filter((item) => item.data.parent === '')
-            .filter(item => !item.completed)
-            .filter((item) => daysIntoYear(new Date(item.data.date)) - daysIntoYear(new Date()) === 0)
-            .map((item) => (
-              <Item key={item.key} item={item} min={min} max={max} updated={updated} selectItem={select} selectedItem={selectedItem} />
-            )) :
-          profile.items
+        profile.items
             .filter((item) => item.data.parent === '')
             .filter(item => !item.completed)
             .map((item) => (
@@ -87,3 +81,15 @@ const ItemList = ({ sort, select, selectedItem, completed }) => {
 }
 
 export { ItemList as default };
+
+
+/**
+ * TODAY SORT
+   profile.items
+            .filter((item) => item.data.parent === '')
+            .filter(item => !item.completed)
+            .filter((item) => daysIntoYear(new Date(item.data.date)) - daysIntoYear(new Date()) === 0)
+            .map((item) => (
+              <Item key={item.key} item={item} min={min} max={max} updated={updated} selectItem={select} selectedItem={selectedItem} />
+            ))
+ */

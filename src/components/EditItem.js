@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import ProfileContext from '../context/ProfileContext';
 import { EditText } from 'react-edit-text';
 import DatePicker from 'react-date-picker';
@@ -6,7 +6,7 @@ import Select from "react-dropdown-select";
 import AddItemForm from './AddItemForm';
 import modifyItem from '../helper-functions/modifyItem';
 
-const EditItem = ({ itemKey, cancel }) => {
+const EditItem = ({ itemKey, cancel, focusMode }) => {
     const { profile, profileDispatch } = useContext(ProfileContext);
     const [tag, setTag] = useState('NULL');
     const [label, setLabel] = useState("");
@@ -64,22 +64,20 @@ const EditItem = ({ itemKey, cancel }) => {
     }
 
 
-    const updateItem = () => {
+    const updateItem = useCallback(() => {
         if (label !== '') {
             const payload = modifyItem(label, duration, tag, date.toDateString(), children, parent, itemKey, createdDate, completedDate);
             profileDispatch({ type: 'EDIT_ITEM', payload })
         }
-    }
+    }, [children, completedDate, createdDate, date, duration, itemKey, label, parent, profileDispatch, tag])
 
     const deleteItem = () => {
         profileDispatch({ type: 'REMOVE_ITEM', itemToBeDeleted: itemKey });
+        cancel();
     }
     useEffect(() => {
         updateItem()
-    }, [tag])
-    /**
-     *   
-     */
+    }, [tag, updateItem])
     return (
         <div id="editItem" className="sidebar right edit-item" onDoubleClick={() => { cancel() }}>
             <div className="top-portion edit-item-section">
@@ -103,11 +101,16 @@ const EditItem = ({ itemKey, cancel }) => {
                     placeholder={tag}
                 />
             </div>
-            <div className="edit-item-section"><div className="h-wrapper">
+            <div className="edit-item-section">
+                <div className="h-wrapper">
                 <button onClick={() => { deleteItem() }}>Delete</button>
                 <button onClick={() => { cancel() }}>Cancel</button>
-            </div></div>
-            <AddItemForm subtaskKey={itemKey} addedSubtask={addedSubtask} addingSubtask />
+                </div>
+            </div>
+            <div className="edit-item-section">
+                <button onClick={() => focusMode(itemKey)}>Focus Mode</button>
+            </div>
+            {/* <AddItemForm subtaskKey={itemKey} addedSubtask={addedSubtask} addingSubtask /> */}
             <p className="edit-item-section">{`Created on ${createdDate}`}</p>
         </div>
     );
