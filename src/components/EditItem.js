@@ -19,10 +19,8 @@ const EditItem = ({ itemKey, cancel, focusMode }) => {
 
     useEffect(() => {
         // set up
-        console.log('triggered this')
         const selectedItem = profile.items.filter(item => item.key === itemKey)[0];
         if (selectedItem === undefined) {
-            console.log('hit here');
             document.getElementById("editItem").style.width = "0";
             document.getElementById("editItem").style.padding = "0";
             document.getElementById("main").style.marginRight = "0";
@@ -35,7 +33,6 @@ const EditItem = ({ itemKey, cancel, focusMode }) => {
             document.getElementById("editItem").style.height = '500px';
             document.getElementById("main").style.marginRight = sideBarWidth;
             document.getElementById("editItem").style.padding = "initial";
-            console.log('this>!', itemKey)
         }
 
         setLabel(selectedItem.label);
@@ -53,13 +50,11 @@ const EditItem = ({ itemKey, cancel, focusMode }) => {
 
     const changeDate = e => {
         if (e !== date) {
-            console.log("CHANGED DATE", e)
             setDate(e);
         }
     }
 
     function addedSubtask(childKey) {
-        console.log("added subtask ", childKey);
         setChildren([...children, childKey]);
     }
 
@@ -89,7 +84,8 @@ const EditItem = ({ itemKey, cancel, focusMode }) => {
             </div>
             <div className="edit-item-section">
                 <label>Date</label>
-                <DatePicker onChange={e => changeDate(e)} value={date} calendarIcon={null} clearIcon={null} calendarClassName="date-picker-calendar" className="date-picker  right-margin" />
+                <input type="date" name="date-picker" id="dp"/>
+                {/* <DatePicker onChange={e => changeDate(e)} value={date} calendarIcon={null} clearIcon={null} calendarClassName="date-picker-calendar" className="date-picker  right-margin" /> */}
             </div>
             <div className="edit-item-section">
                 <label>Tag</label>

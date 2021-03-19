@@ -22,7 +22,7 @@ const UpdateItemsPrompt = ({ tasks }) => {
                 <div className="update-items-prompt glassy hide-overflow">
                     <h3>Old tasks</h3>
                     <p>These tasks are overdue, what would you like to do?</p>
-                    <div className="items-container glassy">
+                    <div className="prompt-bin items-container glassy">
                         {
                             tasks.map((item) => (
                                 <div className="item glassy-inner" key={item.key}>

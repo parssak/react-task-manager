@@ -53,7 +53,7 @@ const sortOptions = [DURATION, DATE, TAG, TODAY, LABEL];
 
 function App() {
   const [profile, profileDispatch] = useReducer(profileReducer, initialProfile);
-  const [focusMode, setFocusMode] = useState("d088dd87-4f6f-4be7-92a1-9b0148cc4089");
+  const [focusMode, setFocusMode] = useState(null);
 
   const [showSettings, setShowSettings] = useState(false);
   const [showNav, setShowNav] = useState(false);
@@ -120,7 +120,7 @@ function App() {
           close={() => setShowSettings(false)}
           refresh={refreshMain}
         />
-        {focusMode && <FocusMode itemKey={focusMode}/>}
+        {focusMode && <FocusMode itemKey={focusMode} stopFocus={() => setFocus(null)}/>}
         {/* <img className="background-img" src="https://source.unsplash.com/1600x900/?nature" alt="imag" /> */}
       </div>
     </ProfileContext.Provider>
